@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Temu-Style Animations</title>
   <style>
-    /* ─── Reset & Base ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --temu-orange: #ff6900;
@@ -20,8 +19,6 @@
       background: var(--temu-bg);
       color: #222;
     }
-
-    /* ─── Header ─── */
     header {
       background: linear-gradient(135deg, var(--temu-orange), var(--temu-red));
       color: #fff;
@@ -30,8 +27,6 @@
     }
     header h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; }
     header p  { opacity: .85; margin-top: 4px; font-size: .9rem; }
-
-    /* ─── Tab nav ─── */
     .tabs {
       display: flex;
       overflow-x: auto;
@@ -58,8 +53,6 @@
       color: var(--temu-orange);
       border-bottom-color: var(--temu-orange);
     }
-
-    /* ─── Panels ─── */
     .panel { display: none; padding: 32px 16px; max-width: 480px; margin: 0 auto; }
     .panel.active { display: block; }
     .panel-title {
@@ -74,10 +67,6 @@
       margin-bottom: 24px;
       line-height: 1.5;
     }
-
-    /* ─────────────────────────────────────────
-       1. ROULETTE SPIN
-    ───────────────────────────────────────── */
     .roulette-wrap {
       display: flex;
       flex-direction: column;
@@ -125,10 +114,6 @@
       text-align: center;
       transition: opacity .3s;
     }
-
-    /* ─────────────────────────────────────────
-       2. COIN RAIN
-    ───────────────────────────────────────── */
     #coinStage {
       position: relative;
       width: 100%;
@@ -169,7 +154,7 @@
       will-change: transform, opacity;
     }
     .coin-particle::after {
-      content: '₩';
+      content: '\20A9';
       font-size: 12px;
       font-weight: 900;
       color: #7a4a00;
@@ -191,10 +176,6 @@
       0%   { transform: translate(0,0) scale(1); opacity: 1; }
       100% { transform: translate(var(--sx), var(--sy)) scale(0); opacity: 0; }
     }
-
-    /* ─────────────────────────────────────────
-       3. GIFT BOX
-    ───────────────────────────────────────── */
     .gift-scene {
       display: flex;
       flex-direction: column;
@@ -209,7 +190,6 @@
       cursor: pointer;
       perspective: 600px;
     }
-    /* lid */
     .gift-lid {
       position: absolute;
       top: 0; left: -6px;
@@ -230,7 +210,6 @@
       background: rgba(255,255,255,.25);
       border-radius: 4px;
     }
-    /* bow */
     .bow { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); z-index: 4; }
     .bow-left, .bow-right {
       display: inline-block;
@@ -250,7 +229,6 @@
       transform: translate(-50%,-50%);
       z-index: 5;
     }
-    /* body */
     .gift-body {
       position: absolute;
       bottom: 0; left: 0;
@@ -268,7 +246,6 @@
       width: 20px; height: 100%;
       background: rgba(255,255,255,.15);
     }
-    /* reward popup */
     .gift-reward {
       position: absolute;
       top: -60px; left: 50%;
@@ -310,10 +287,6 @@
       color: #888;
       text-align: center;
     }
-
-    /* ─────────────────────────────────────────
-       4. SKELETON LOADING
-    ───────────────────────────────────────── */
     .skeleton-demo {
       display: flex;
       flex-direction: column;
@@ -329,7 +302,6 @@
       gap: 14px;
       align-items: flex-start;
     }
-    /* skeleton pulse shimmer */
     .sk {
       background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
       background-size: 200% 100%;
@@ -346,7 +318,6 @@
     .sk-line.w60 { width: 60%; }
     .sk-line.w80 { width: 80%; }
     .sk-line.w40 { width: 40%; }
-    /* real card that fades in */
     .real-card {
       background: #fff;
       border-radius: 16px;
@@ -384,10 +355,6 @@
       margin-top: 6px;
     }
     .skeleton-controls { display: flex; gap: 10px; flex-wrap: wrap; }
-
-    /* ─────────────────────────────────────────
-       5. SPRING BUTTON / CART FLY
-    ───────────────────────────────────────── */
     .products-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -413,7 +380,6 @@
     .product-info { padding: 10px 12px 12px; }
     .product-name { font-size: .82rem; font-weight: 600; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .product-price { color: var(--temu-orange); font-weight: 800; font-size: 1rem; }
-
     .add-cart-btn {
       width: 100%;
       margin-top: 8px;
@@ -452,8 +418,6 @@
     @keyframes rippleOut {
       to { transform: scale(4); opacity: 0; }
     }
-
-    /* cart bar */
     .cart-bar {
       background: #fff;
       border-radius: 16px;
@@ -489,8 +453,6 @@
     }
     .cart-label { font-size: .85rem; color: #888; }
     .cart-total { margin-left: auto; font-weight: 800; font-size: 1.1rem; color: var(--temu-orange); }
-
-    /* flying item */
     .fly-item {
       position: fixed;
       font-size: 1.6rem;
@@ -504,8 +466,6 @@
       60%  { opacity: 1; }
       100% { transform: translate(var(--fx), var(--fy)) scale(.2) rotate(180deg); opacity: 0; }
     }
-
-    /* ─── Shared Button ─── */
     .temu-btn {
       background: linear-gradient(135deg, var(--temu-orange), var(--temu-red));
       color: #fff;
@@ -521,8 +481,6 @@
     }
     .temu-btn:hover  { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,105,0,.45); }
     .temu-btn:active { transform: scale(.96); }
-
-    /* ─── Result toast ─── */
     .toast {
       position: fixed;
       bottom: 32px; left: 50%;
@@ -543,21 +501,20 @@
 <body>
 
 <header>
-  <h1>🛍 Temu-Style Animations</h1>
+  <h1>&#x1F6CD; Temu-Style Animations</h1>
   <p>5가지 이커머스 핵심 애니메이션 데모</p>
 </header>
 
 <nav class="tabs" role="tablist">
-  <button class="tab-btn active" data-tab="roulette">🎡 룰렛</button>
-  <button class="tab-btn" data-tab="coin">🪙 코인비</button>
-  <button class="tab-btn" data-tab="gift">🎁 선물상자</button>
-  <button class="tab-btn" data-tab="skeleton">⚡ 스켈레톤</button>
-  <button class="tab-btn" data-tab="spring">🛒 스프링버튼</button>
+  <button class="tab-btn active" data-tab="roulette">&#x1F3A1; 룰렛</button>
+  <button class="tab-btn" data-tab="coin">&#x1FA99; 코인비</button>
+  <button class="tab-btn" data-tab="gift">&#x1F381; 선물상자</button>
+  <button class="tab-btn" data-tab="skeleton">&#x26A1; 스켈레톤</button>
+  <button class="tab-btn" data-tab="spring">&#x1F6D2; 스프링버튼</button>
 </nav>
 
-<!-- ══════════ 1. ROULETTE ══════════ -->
 <section id="tab-roulette" class="panel active">
-  <p class="panel-title">🎡 룰렛 스핀</p>
+  <p class="panel-title">&#x1F3A1; 룰렛 스핀</p>
   <p class="panel-desc">Canvas로 그린 룰렛 — 클릭 시 관성 회전 후 상품 당첨 연출</p>
   <div class="roulette-wrap">
     <div class="wheel-container">
@@ -566,25 +523,23 @@
       <div class="wheel-center"></div>
     </div>
     <div class="roulette-result" id="rouletteResult">버튼을 눌러 룰렛을 돌려보세요!</div>
-    <button class="temu-btn" id="spinBtn">🎰 돌리기!</button>
+    <button class="temu-btn" id="spinBtn">&#x1F3B0; 돌리기!</button>
   </div>
 </section>
 
-<!-- ══════════ 2. COIN RAIN ══════════ -->
 <section id="tab-coin" class="panel">
-  <p class="panel-title">🪙 코인 비 (Coin Rain)</p>
+  <p class="panel-title">&#x1FA99; 코인 비 (Coin Rain)</p>
   <p class="panel-desc">터치/클릭 위치에서 코인 파티클이 쏟아지는 보상 연출</p>
   <div id="coinStage">
-    <div class="coin-score" id="coinScore">₩ 0</div>
+    <div class="coin-score" id="coinScore">&#x20A9; 0</div>
     <div class="coin-tap-hint" id="coinHint">
-      <span>👆</span>화면을 탭하면 코인이 쏟아집니다!
+      <span>&#x1F446;</span>화면을 탭하면 코인이 쏟아집니다!
     </div>
   </div>
 </section>
 
-<!-- ══════════ 3. GIFT BOX ══════════ -->
 <section id="tab-gift" class="panel">
-  <p class="panel-title">🎁 선물 상자 개봉</p>
+  <p class="panel-title">&#x1F381; 선물 상자 개봉</p>
   <p class="panel-desc">3D CSS Transform으로 뚜껑이 열리며 보상이 튀어 나오는 연출</p>
   <div class="gift-scene">
     <div class="gift-box" id="giftBox">
@@ -594,80 +549,75 @@
       </div>
       <div class="gift-lid"></div>
       <div class="gift-body"></div>
-      <div class="gift-reward" id="giftReward">🎉 쿠폰 3,000원 획득!</div>
+      <div class="gift-reward" id="giftReward">&#x1F389; 쿠폰 3,000원 획득!</div>
       <div class="confetti-container" id="confettiContainer"></div>
     </div>
-    <p class="gift-instruction" id="giftInstruction">상자를 클릭해서 열어보세요 🎁</p>
+    <p class="gift-instruction" id="giftInstruction">상자를 클릭해서 열어보세요 &#x1F381;</p>
     <button class="temu-btn" id="resetGift" style="display:none">다시 열기</button>
   </div>
 </section>
 
-<!-- ══════════ 4. SKELETON ══════════ -->
 <section id="tab-skeleton" class="panel">
-  <p class="panel-title">⚡ 스켈레톤 로딩</p>
+  <p class="panel-title">&#x26A1; 스켈레톤 로딩</p>
   <p class="panel-desc">Shimmer 애니메이션 스켈레톤 → 실제 콘텐츠 페이드인 전환</p>
   <div class="skeleton-demo">
     <div id="skeletonArea"></div>
     <div class="skeleton-controls">
-      <button class="temu-btn" id="skelReloadBtn">🔄 새로고침 시뮬레이션</button>
+      <button class="temu-btn" id="skelReloadBtn">&#x1F504; 새로고침 시뮬레이션</button>
     </div>
   </div>
 </section>
 
-<!-- ══════════ 5. SPRING BUTTON ══════════ -->
 <section id="tab-spring" class="panel">
-  <p class="panel-title">🛒 스프링 버튼 + 장바구니 플라이</p>
+  <p class="panel-title">&#x1F6D2; 스프링 버튼 + 장바구니 플라이</p>
   <p class="panel-desc">탄성 물리 버튼 + 아이템이 장바구니로 날아가는 마이크로 인터랙션</p>
   <div class="products-grid">
     <div class="product-card p1">
-      <div class="product-thumb">👟</div>
+      <div class="product-thumb">&#x1F45F;</div>
       <div class="product-info">
         <div class="product-name">스니커즈</div>
-        <div class="product-price">₩12,900</div>
-        <button class="add-cart-btn" data-emoji="👟" data-price="12900">장바구니 담기</button>
+        <div class="product-price">&#x20A9;12,900</div>
+        <button class="add-cart-btn" data-emoji="&#x1F45F;" data-price="12900">장바구니 담기</button>
       </div>
     </div>
     <div class="product-card p2">
-      <div class="product-thumb">🎧</div>
+      <div class="product-thumb">&#x1F3A7;</div>
       <div class="product-info">
         <div class="product-name">무선 이어폰</div>
-        <div class="product-price">₩8,500</div>
-        <button class="add-cart-btn" data-emoji="🎧" data-price="8500">장바구니 담기</button>
+        <div class="product-price">&#x20A9;8,500</div>
+        <button class="add-cart-btn" data-emoji="&#x1F3A7;" data-price="8500">장바구니 담기</button>
       </div>
     </div>
     <div class="product-card p3">
-      <div class="product-thumb">⌚</div>
+      <div class="product-thumb">&#x231A;</div>
       <div class="product-info">
         <div class="product-name">스마트워치</div>
-        <div class="product-price">₩24,000</div>
-        <button class="add-cart-btn" data-emoji="⌚" data-price="24000">장바구니 담기</button>
+        <div class="product-price">&#x20A9;24,000</div>
+        <button class="add-cart-btn" data-emoji="&#x231A;" data-price="24000">장바구니 담기</button>
       </div>
     </div>
     <div class="product-card p4">
-      <div class="product-thumb">🕶️</div>
+      <div class="product-thumb">&#x1F576;&#xFE0F;</div>
       <div class="product-info">
         <div class="product-name">선글라스</div>
-        <div class="product-price">₩5,600</div>
-        <button class="add-cart-btn" data-emoji="🕶️" data-price="5600">장바구니 담기</button>
+        <div class="product-price">&#x20A9;5,600</div>
+        <button class="add-cart-btn" data-emoji="&#x1F576;&#xFE0F;" data-price="5600">장바구니 담기</button>
       </div>
     </div>
   </div>
   <div class="cart-bar" id="cartBar">
     <div class="cart-icon-wrap">
-      🛒
+      &#x1F6D2;
       <div class="cart-badge" id="cartBadge">0</div>
     </div>
     <span class="cart-label">장바구니</span>
-    <span class="cart-total" id="cartTotal">₩0</span>
+    <span class="cart-total" id="cartTotal">&#x20A9;0</span>
   </div>
 </section>
 
 <div class="toast" id="toast"></div>
 
 <script>
-/* ══════════════════════════════════════
-   TABS
-══════════════════════════════════════ */
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -684,26 +634,23 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-/* ══════════════════════════════════════
-   1. ROULETTE
-══════════════════════════════════════ */
 (function() {
   const canvas = document.getElementById('rouletteCanvas');
   const ctx    = canvas.getContext('2d');
   const prizes = [
-    { label: '💰 1,000원', color: '#FF6900' },
-    { label: '🎫 쿠폰 5%', color: '#E53935' },
-    { label: '🚚 무료배송', color: '#43A047' },
-    { label: '🎁 랜덤박스', color: '#8E24AA' },
-    { label: '💎 포인트 200', color: '#1E88E5' },
-    { label: '⭐ 별점쿠폰',  color: '#F4511E' },
-    { label: '🪙 코인 50',   color: '#FFD600' },
-    { label: '✨ 꽝 (+응원)', color: '#546E7A' },
+    { label: '1,000원', color: '#FF6900' },
+    { label: '쿠폰 5%', color: '#E53935' },
+    { label: '무료배송', color: '#43A047' },
+    { label: '랜덤박스', color: '#8E24AA' },
+    { label: '포인트 200', color: '#1E88E5' },
+    { label: '별점쿠폰',  color: '#F4511E' },
+    { label: '코인 50',   color: '#FFD600' },
+    { label: '꽝 (+응원)', color: '#546E7A' },
   ];
-  const N      = prizes.length;
-  const arc    = (2 * Math.PI) / N;
-  let   angle  = 0;
-  let   spinning = false;
+  const N   = prizes.length;
+  const arc = (2 * Math.PI) / N;
+  let angle   = 0;
+  let spinning = false;
 
   function drawWheel(rot) {
     const cx = canvas.width / 2, cy = canvas.height / 2, r = cx - 4;
@@ -711,7 +658,6 @@ function showToast(msg) {
     prizes.forEach((p, i) => {
       const start = rot + i * arc - Math.PI / 2;
       const end   = start + arc;
-      // slice
       ctx.beginPath();
       ctx.moveTo(cx, cy);
       ctx.arc(cx, cy, r, start, end);
@@ -721,7 +667,6 @@ function showToast(msg) {
       ctx.strokeStyle = 'rgba(255,255,255,.35)';
       ctx.lineWidth = 2;
       ctx.stroke();
-      // text
       ctx.save();
       ctx.translate(cx, cy);
       ctx.rotate(start + arc / 2);
@@ -740,15 +685,13 @@ function showToast(msg) {
   document.getElementById('spinBtn').addEventListener('click', () => {
     if (spinning) return;
     spinning = true;
-    document.getElementById('rouletteResult').textContent = '🎰 돌리는 중...';
+    document.getElementById('rouletteResult').textContent = '돌리는 중...';
     const extraSpins = (5 + Math.random() * 5) * 2 * Math.PI;
     const targetAngle = angle + extraSpins;
     const duration = 3500;
     const start = performance.now();
     const startAngle = angle;
-
     function easeOut(t) { return 1 - Math.pow(1 - t, 4); }
-
     function frame(now) {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
@@ -758,21 +701,17 @@ function showToast(msg) {
         requestAnimationFrame(frame);
       } else {
         spinning = false;
-        // pointer is at top (π/2 offset) — find which slice is there
         const normalised = ((angle % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
         const pointerAngle = (3 * Math.PI / 2 - normalised + 2 * Math.PI) % (2 * Math.PI);
         const idx = Math.floor(pointerAngle / arc) % N;
-        document.getElementById('rouletteResult').textContent = `🎉 당첨: ${prizes[idx].label}`;
-        showToast(`🎉 ${prizes[idx].label} 당첨!`);
+        document.getElementById('rouletteResult').textContent = '당첨: ' + prizes[idx].label;
+        showToast('당첨! ' + prizes[idx].label);
       }
     }
     requestAnimationFrame(frame);
   });
 })();
 
-/* ══════════════════════════════════════
-   2. COIN RAIN
-══════════════════════════════════════ */
 (function() {
   const stage = document.getElementById('coinStage');
   const hint  = document.getElementById('coinHint');
@@ -780,20 +719,18 @@ function showToast(msg) {
   let total = 0;
   let hintHidden = false;
 
-  function spawnCoins(x, y, count = 12) {
+  function spawnCoins(x, y, count) {
+    count = count || 12;
     if (!hintHidden) { hint.style.opacity = '0'; hintHidden = true; }
-    // sparks first
     for (let s = 0; s < 8; s++) {
       const spark = document.createElement('div');
       spark.className = 'spark';
       const sx = (Math.random() - .5) * 80 + 'px';
       const sy = (Math.random() - .5) * 80 + 'px';
-      spark.style.cssText = `left:${x}px;top:${y}px;--sx:${sx};--sy:${sy};
-        background:hsl(${40 + Math.random()*30},100%,60%)`;
+      spark.style.cssText = 'left:'+x+'px;top:'+y+'px;--sx:'+sx+';--sy:'+sy+';background:hsl('+(40+Math.random()*30)+',100%,60%)';
       stage.appendChild(spark);
-      spark.addEventListener('animationend', () => spark.remove());
+      spark.addEventListener('animationend', function(){ spark.remove(); });
     }
-    // coins
     for (let i = 0; i < count; i++) {
       const coin = document.createElement('div');
       coin.className = 'coin-particle';
@@ -802,128 +739,95 @@ function showToast(msg) {
       const dur      = (.6 + Math.random() * .6) + 's';
       const ox = x + (Math.random() - .5) * 60;
       const oy = y + (Math.random() - .5) * 20;
-      coin.style.cssText = `left:${ox}px;top:${oy}px;--fall:${fallDist};--spin:${spinDeg};--dur:${dur};
-        transform:rotate(${spinDeg});animation-delay:${Math.random()*.15}s`;
+      coin.style.cssText = 'left:'+ox+'px;top:'+oy+'px;--fall:'+fallDist+';--spin:'+spinDeg+';--dur:'+dur+';transform:rotate('+spinDeg+');animation-delay:'+(Math.random()*.15)+'s';
       stage.appendChild(coin);
-      coin.addEventListener('animationend', () => coin.remove());
+      coin.addEventListener('animationend', function(){ coin.remove(); });
     }
     const reward = Math.floor(Math.random() * 500 + 100);
     total += reward;
-    scoreEl.textContent = `₩ ${total.toLocaleString()}`;
+    scoreEl.textContent = '₩ ' + total.toLocaleString();
   }
 
-  stage.addEventListener('click',  e => { const r = stage.getBoundingClientRect(); spawnCoins(e.clientX - r.left, e.clientY - r.top); });
-  stage.addEventListener('touchstart', e => {
+  stage.addEventListener('click', function(e) {
+    const r = stage.getBoundingClientRect();
+    spawnCoins(e.clientX - r.left, e.clientY - r.top);
+  });
+  stage.addEventListener('touchstart', function(e) {
     e.preventDefault();
     const r = stage.getBoundingClientRect();
-    Array.from(e.touches).forEach(t => spawnCoins(t.clientX - r.left, t.clientY - r.top, 8));
+    Array.from(e.touches).forEach(function(t) { spawnCoins(t.clientX - r.left, t.clientY - r.top, 8); });
   }, { passive: false });
 })();
 
-/* ══════════════════════════════════════
-   3. GIFT BOX
-══════════════════════════════════════ */
 (function() {
   const box      = document.getElementById('giftBox');
   const hint     = document.getElementById('giftInstruction');
   const resetBtn = document.getElementById('resetGift');
   const confetti = document.getElementById('confettiContainer');
   let opened = false;
-
-  const rewards = ['🎉 쿠폰 3,000원 획득!', '💎 VIP 포인트 500P!', '🚚 무료배송 쿠폰!', '🎁 깜짝 선물!', '⭐ 별점 보상 300원!'];
+  const rewards = ['쿠폰 3,000원 획득!', 'VIP 포인트 500P!', '무료배송 쿠폰!', '깜짝 선물!', '별점 보상 300원!'];
   const colors  = ['#FF6900','#E53935','#FFD600','#43A047','#8E24AA','#1E88E5'];
 
   function launchConfetti() {
     confetti.innerHTML = '';
     for (let i = 0; i < 28; i++) {
-      const p   = document.createElement('div');
+      const p = document.createElement('div');
       p.className = 'conf-piece';
       const cx = ((Math.random() - .5) * 240) + 'px';
       const cy = (-(80 + Math.random() * 140)) + 'px';
       const cr = ((Math.random() - .5) * 720) + 'deg';
-      p.style.cssText = `
-        left:50%;top:50%;
-        background:${colors[Math.floor(Math.random()*colors.length)]};
-        border-radius:${Math.random() > .5 ? '50%' : '2px'};
-        --cx:${cx};--cy:${cy};--cr:${cr};
-        animation-delay:${Math.random()*.3}s`;
+      p.style.cssText = 'left:50%;top:50%;background:'+colors[Math.floor(Math.random()*colors.length)]+';border-radius:'+(Math.random()>.5?'50%':'2px')+';--cx:'+cx+';--cy:'+cy+';--cr:'+cr+';animation-delay:'+(Math.random()*.3)+'s';
       confetti.appendChild(p);
     }
   }
 
-  box.addEventListener('click', () => {
+  box.addEventListener('click', function() {
     if (opened) return;
     opened = true;
     const reward = rewards[Math.floor(Math.random() * rewards.length)];
     document.getElementById('giftReward').textContent = reward;
     box.classList.add('opened');
     launchConfetti();
-    hint.textContent = '🎊 축하합니다!';
+    hint.textContent = '축하합니다!';
     resetBtn.style.display = 'inline-block';
     showToast(reward);
   });
 
-  resetBtn.addEventListener('click', () => {
+  resetBtn.addEventListener('click', function() {
     opened = false;
     box.classList.remove('opened');
     confetti.innerHTML = '';
-    hint.textContent = '상자를 클릭해서 열어보세요 🎁';
+    hint.textContent = '상자를 클릭해서 열어보세요';
     resetBtn.style.display = 'none';
   });
 })();
 
-/* ══════════════════════════════════════
-   4. SKELETON LOADING
-══════════════════════════════════════ */
 (function() {
   const area = document.getElementById('skeletonArea');
   const products = [
-    { emoji:'👟', name:'에어 스니커즈 런닝화', price:'₩12,900', old:'₩29,000', badge:'-55%' },
-    { emoji:'🎧', name:'블루투스 무선 이어폰', price:'₩8,500',  old:'₩18,000', badge:'-53%' },
-    { emoji:'⌚', name:'스마트워치 밴드',      price:'₩24,000', old:'₩52,000', badge:'-54%' },
+    { emoji:'&#x1F45F;', name:'에어 스니커즈 런닝화', price:'₩12,900', old:'₩29,000', badge:'-55%' },
+    { emoji:'&#x1F3A7;', name:'블루투스 무선 이어폰', price:'₩8,500',  old:'₩18,000', badge:'-53%' },
+    { emoji:'&#x231A;',  name:'스마트워치 밴드',      price:'₩24,000', old:'₩52,000', badge:'-54%' },
   ];
 
   function showSkeleton() {
-    area.innerHTML = products.map(() => `
-      <div class="skeleton-card">
-        <div class="sk sk-img"></div>
-        <div class="sk-lines">
-          <div class="sk sk-line w80"></div>
-          <div class="sk sk-line w60"></div>
-          <div class="sk sk-line w40"></div>
-        </div>
-      </div>`).join('');
+    area.innerHTML = products.map(function() { return '<div class="skeleton-card"><div class="sk sk-img"></div><div class="sk-lines"><div class="sk sk-line w80"></div><div class="sk sk-line w60"></div><div class="sk sk-line w40"></div></div></div>'; }).join('');
   }
 
   function showContent() {
-    area.innerHTML = products.map(p => `
-      <div class="real-card">
-        <div class="real-img">${p.emoji}</div>
-        <div class="real-info">
-          <div class="real-name">${p.name}</div>
-          <div class="real-price">${p.price} <span class="real-old">${p.old}</span></div>
-          <span class="real-badge">${p.badge}</span>
-        </div>
-      </div>`).join('');
-    requestAnimationFrame(() => {
-      area.querySelectorAll('.real-card').forEach((c, i) => {
-        setTimeout(() => c.classList.add('loaded'), i * 120);
+    area.innerHTML = products.map(function(p) { return '<div class="real-card"><div class="real-img">'+p.emoji+'</div><div class="real-info"><div class="real-name">'+p.name+'</div><div class="real-price">'+p.price+' <span class="real-old">'+p.old+'</span></div><span class="real-badge">'+p.badge+'</span></div></div>'; }).join('');
+    requestAnimationFrame(function() {
+      area.querySelectorAll('.real-card').forEach(function(c, i) {
+        setTimeout(function() { c.classList.add('loaded'); }, i * 120);
       });
     });
   }
 
-  function simulate() {
-    showSkeleton();
-    setTimeout(showContent, 1800);
-  }
-
+  function simulate() { showSkeleton(); setTimeout(showContent, 1800); }
   simulate();
   document.getElementById('skelReloadBtn').addEventListener('click', simulate);
 })();
 
-/* ══════════════════════════════════════
-   5. SPRING BUTTON + CART FLY
-══════════════════════════════════════ */
 (function() {
   let cartCount = 0;
   let cartTotal = 0;
@@ -936,27 +840,23 @@ function showToast(msg) {
     const x = e.clientX - rect.left, y = e.clientY - rect.top;
     const rip = document.createElement('span');
     rip.className = 'btn-ripple';
-    rip.style.cssText = `width:${rect.width}px;height:${rect.width}px;left:${x - rect.width/2}px;top:${y - rect.width/2}px`;
+    rip.style.cssText = 'width:'+rect.width+'px;height:'+rect.width+'px;left:'+(x-rect.width/2)+'px;top:'+(y-rect.width/2)+'px';
     btn.appendChild(rip);
-    rip.addEventListener('animationend', () => rip.remove());
+    rip.addEventListener('animationend', function(){ rip.remove(); });
   }
 
   function flyToCart(emoji, fromRect) {
     const cartRect = cartBar.getBoundingClientRect();
     const destX = cartRect.left + 20;
     const destY = cartRect.top  + cartRect.height / 2;
-
     const el = document.createElement('div');
     el.className = 'fly-item';
     el.textContent = emoji;
     const startX = fromRect.left + fromRect.width  / 2;
     const startY = fromRect.top  + fromRect.height / 2;
-    el.style.cssText = `
-      left:${startX}px; top:${startY}px;
-      --fx:${destX - startX}px; --fy:${destY - startY}px;
-      --fly-dur:.75s`;
+    el.style.cssText = 'left:'+startX+'px;top:'+startY+'px;--fx:'+(destX-startX)+'px;--fy:'+(destY-startY)+'px;--fly-dur:.75s';
     document.body.appendChild(el);
-    el.addEventListener('animationend', () => {
+    el.addEventListener('animationend', function() {
       el.remove();
       badgeEl.classList.remove('bounce');
       void badgeEl.offsetWidth;
@@ -964,28 +864,21 @@ function showToast(msg) {
     });
   }
 
-  document.querySelectorAll('.add-cart-btn').forEach(btn => {
-    btn.addEventListener('click', e => {
-      // spring pop
+  document.querySelectorAll('.add-cart-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
       btn.classList.remove('spring');
       void btn.offsetWidth;
       btn.classList.add('spring');
-
-      // ripple
       addRipple(btn, e);
-
       const emoji = btn.dataset.emoji;
       const price = parseInt(btn.dataset.price, 10);
       const rect  = btn.getBoundingClientRect();
-
       flyToCart(emoji, rect);
-
       cartCount++;
       cartTotal += price;
-      badgeEl.textContent  = cartCount;
-      totalEl.textContent  = `₩${cartTotal.toLocaleString()}`;
-
-      showToast(`${emoji} 장바구니에 담겼어요!`);
+      badgeEl.textContent = cartCount;
+      totalEl.textContent = '₩' + cartTotal.toLocaleString();
+      showToast(emoji + ' 장바구니에 담겼어요!');
     });
   });
 })();
