@@ -53,6 +53,46 @@
       color: var(--temu-orange);
       border-bottom-color: var(--temu-orange);
     }
+
+    .showcase-overview {
+      max-width: 980px;
+      margin: 18px auto 0;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+    }
+    .overview-card {
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(255,105,0,.14);
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: 0 3px 14px rgba(255,105,0,.08);
+    }
+    .overview-card strong {
+      display: block;
+      color: var(--temu-red);
+      font-size: .86rem;
+      margin-bottom: 4px;
+    }
+    .overview-card span {
+      display: block;
+      color: #777;
+      font-size: .74rem;
+      line-height: 1.35;
+    }
+    .tech-chip {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(255,105,0,.1);
+      color: var(--temu-orange);
+      font-size: .68rem;
+      font-weight: 800;
+      vertical-align: middle;
+    }
     .panel { display: none; padding: 32px 16px; max-width: 480px; margin: 0 auto; }
     .panel.active { display: block; }
     .panel-title {
@@ -513,8 +553,16 @@
   <button class="tab-btn" data-tab="spring">&#x1F6D2; 스프링버튼</button>
 </nav>
 
+<section class="showcase-overview" aria-label="구현된 애니메이션 종류">
+  <article class="overview-card"><strong>게임화 룰렛</strong><span>Canvas 드로잉과 ease-out 회전으로 당첨 연출을 구현합니다.</span></article>
+  <article class="overview-card"><strong>보상 파티클</strong><span>클릭 위치 기반 코인 비와 스파크로 즉시 보상감을 줍니다.</span></article>
+  <article class="overview-card"><strong>선물 개봉</strong><span>3D CSS transform과 confetti burst로 이벤트 팝업을 표현합니다.</span></article>
+  <article class="overview-card"><strong>스켈레톤 로딩</strong><span>shimmer placeholder에서 상품 카드로 자연스럽게 전환합니다.</span></article>
+  <article class="overview-card"><strong>마이크로 인터랙션</strong><span>스프링 버튼, ripple, 장바구니 fly-to-cart를 결합합니다.</span></article>
+</section>
+
 <section id="tab-roulette" class="panel active">
-  <p class="panel-title">&#x1F3A1; 룰렛 스핀</p>
+  <p class="panel-title">&#x1F3A1; 룰렛 스핀 <span class="tech-chip">Canvas</span></p>
   <p class="panel-desc">Canvas로 그린 룰렛 — 클릭 시 관성 회전 후 상품 당첨 연출</p>
   <div class="roulette-wrap">
     <div class="wheel-container">
@@ -528,7 +576,7 @@
 </section>
 
 <section id="tab-coin" class="panel">
-  <p class="panel-title">&#x1FA99; 코인 비 (Coin Rain)</p>
+  <p class="panel-title">&#x1FA99; 코인 비 (Coin Rain) <span class="tech-chip">Particle</span></p>
   <p class="panel-desc">터치/클릭 위치에서 코인 파티클이 쏟아지는 보상 연출</p>
   <div id="coinStage">
     <div class="coin-score" id="coinScore">&#x20A9; 0</div>
@@ -539,7 +587,7 @@
 </section>
 
 <section id="tab-gift" class="panel">
-  <p class="panel-title">&#x1F381; 선물 상자 개봉</p>
+  <p class="panel-title">&#x1F381; 선물 상자 개봉 <span class="tech-chip">3D CSS</span></p>
   <p class="panel-desc">3D CSS Transform으로 뚜껑이 열리며 보상이 튀어 나오는 연출</p>
   <div class="gift-scene">
     <div class="gift-box" id="giftBox">
@@ -558,7 +606,7 @@
 </section>
 
 <section id="tab-skeleton" class="panel">
-  <p class="panel-title">&#x26A1; 스켈레톤 로딩</p>
+  <p class="panel-title">&#x26A1; 스켈레톤 로딩 <span class="tech-chip">Shimmer</span></p>
   <p class="panel-desc">Shimmer 애니메이션 스켈레톤 → 실제 콘텐츠 페이드인 전환</p>
   <div class="skeleton-demo">
     <div id="skeletonArea"></div>
@@ -569,7 +617,7 @@
 </section>
 
 <section id="tab-spring" class="panel">
-  <p class="panel-title">&#x1F6D2; 스프링 버튼 + 장바구니 플라이</p>
+  <p class="panel-title">&#x1F6D2; 스프링 버튼 + 장바구니 플라이 <span class="tech-chip">Spring</span></p>
   <p class="panel-desc">탄성 물리 버튼 + 아이템이 장바구니로 날아가는 마이크로 인터랙션</p>
   <div class="products-grid">
     <div class="product-card p1">
