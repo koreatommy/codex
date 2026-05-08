@@ -14,405 +14,82 @@
       --temu-bg: #fff7f0;
       --shadow: 0 4px 20px rgba(0,0,0,.12);
     }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--temu-bg);
-      color: #222;
-    }
-    header {
-      background: linear-gradient(135deg, var(--temu-orange), var(--temu-red));
-      color: #fff;
-      text-align: center;
-      padding: 24px 16px 16px;
-    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--temu-bg); color: #222; }
+    header { background: linear-gradient(135deg, var(--temu-orange), var(--temu-red)); color: #fff; text-align: center; padding: 24px 16px 16px; }
     header h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; }
     header p  { opacity: .85; margin-top: 4px; font-size: .9rem; }
-    .tabs {
-      display: flex;
-      overflow-x: auto;
-      background: #fff;
-      border-bottom: 2px solid #f0e0d6;
-      gap: 0;
-      scrollbar-width: none;
-    }
+    .tabs { display: flex; overflow-x: auto; background: #fff; border-bottom: 2px solid #f0e0d6; scrollbar-width: none; }
     .tabs::-webkit-scrollbar { display: none; }
-    .tab-btn {
-      flex: 0 0 auto;
-      padding: 14px 20px;
-      border: none;
-      background: none;
-      font-size: .85rem;
-      font-weight: 600;
-      color: #999;
-      cursor: pointer;
-      white-space: nowrap;
-      border-bottom: 3px solid transparent;
-      transition: color .2s, border-color .2s;
-    }
-    .tab-btn.active {
-      color: var(--temu-orange);
-      border-bottom-color: var(--temu-orange);
-    }
-
-    .showcase-overview {
-      max-width: 980px;
-      margin: 18px auto 0;
-      padding: 0 16px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 10px;
-    }
-    .overview-card {
-      background: rgba(255,255,255,.92);
-      border: 1px solid rgba(255,105,0,.14);
-      border-radius: 16px;
-      padding: 12px;
-      box-shadow: 0 3px 14px rgba(255,105,0,.08);
-    }
-    .overview-card strong {
-      display: block;
-      color: var(--temu-red);
-      font-size: .86rem;
-      margin-bottom: 4px;
-    }
-    .overview-card span {
-      display: block;
-      color: #777;
-      font-size: .74rem;
-      line-height: 1.35;
-    }
-    .tech-chip {
-      display: inline-flex;
-      align-items: center;
-      margin-left: 6px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(255,105,0,.1);
-      color: var(--temu-orange);
-      font-size: .68rem;
-      font-weight: 800;
-      vertical-align: middle;
-    }
+    .tab-btn { flex: 0 0 auto; padding: 14px 20px; border: none; background: none; font-size: .85rem; font-weight: 600; color: #999; cursor: pointer; white-space: nowrap; border-bottom: 3px solid transparent; transition: color .2s, border-color .2s; }
+    .tab-btn.active { color: var(--temu-orange); border-bottom-color: var(--temu-orange); }
+    .showcase-overview { max-width: 980px; margin: 18px auto 0; padding: 0 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+    .overview-card { background: rgba(255,255,255,.92); border: 1px solid rgba(255,105,0,.14); border-radius: 16px; padding: 12px; box-shadow: 0 3px 14px rgba(255,105,0,.08); }
+    .overview-card strong { display: block; color: var(--temu-red); font-size: .86rem; margin-bottom: 4px; }
+    .overview-card span { display: block; color: #777; font-size: .74rem; line-height: 1.35; }
+    .tech-chip { display: inline-flex; align-items: center; margin-left: 6px; padding: 3px 8px; border-radius: 999px; background: rgba(255,105,0,.1); color: var(--temu-orange); font-size: .68rem; font-weight: 800; vertical-align: middle; }
     .panel { display: none; padding: 32px 16px; max-width: 480px; margin: 0 auto; }
     .panel.active { display: block; }
-    .panel-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: var(--temu-red);
-    }
-    .panel-desc {
-      font-size: .82rem;
-      color: #888;
-      margin-bottom: 24px;
-      line-height: 1.5;
-    }
-    .roulette-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-    }
-    .wheel-container {
-      position: relative;
-      width: 280px;
-      height: 280px;
-    }
-    #rouletteCanvas {
-      border-radius: 50%;
-      box-shadow: 0 0 0 6px #fff, 0 0 0 10px var(--temu-orange), var(--shadow);
-    }
-    .wheel-pointer {
-      position: absolute;
-      top: -18px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 14px solid transparent;
-      border-right: 14px solid transparent;
-      border-top: 30px solid var(--temu-red);
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,.3));
-      z-index: 10;
-    }
-    .wheel-center {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%,-50%);
-      width: 44px; height: 44px;
-      background: radial-gradient(circle, #fff 40%, var(--temu-orange));
-      border-radius: 50%;
-      border: 3px solid #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,.25);
-      z-index: 10;
-    }
-    .roulette-result {
-      min-height: 36px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--temu-red);
-      text-align: center;
-      transition: opacity .3s;
-    }
-    #coinStage {
-      position: relative;
-      width: 100%;
-      height: 320px;
-      background: linear-gradient(180deg, #1a1a2e, #16213e);
-      border-radius: 20px;
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .coin-tap-hint {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%,-50%);
-      text-align: center;
-      color: rgba(255,255,255,.6);
-      font-size: .85rem;
-      pointer-events: none;
-      transition: opacity .4s;
-    }
+    .panel-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; color: var(--temu-red); }
+    .panel-desc { font-size: .82rem; color: #888; margin-bottom: 24px; line-height: 1.5; }
+    /* ── ROULETTE ── */
+    .roulette-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .wheel-container { position: relative; width: 280px; height: 280px; }
+    #rouletteCanvas { border-radius: 50%; box-shadow: 0 0 0 6px #fff, 0 0 0 10px var(--temu-orange), var(--shadow); }
+    .wheel-pointer { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-top: 30px solid var(--temu-red); filter: drop-shadow(0 2px 4px rgba(0,0,0,.3)); z-index: 10; }
+    .wheel-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 44px; height: 44px; background: radial-gradient(circle, #fff 40%, var(--temu-orange)); border-radius: 50%; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,.25); z-index: 10; }
+    .roulette-result { min-height: 36px; font-size: 1.1rem; font-weight: 700; color: var(--temu-red); text-align: center; }
+    /* ── COIN RAIN ── */
+    #coinStage { position: relative; width: 100%; height: 320px; background: linear-gradient(180deg, #1a1a2e, #16213e); border-radius: 20px; overflow: hidden; cursor: pointer; }
+    .coin-tap-hint { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; color: rgba(255,255,255,.6); font-size: .85rem; pointer-events: none; transition: opacity .4s; }
     .coin-tap-hint span { font-size: 2.5rem; display: block; margin-bottom: 8px; }
-    .coin-score {
-      position: absolute;
-      top: 16px; right: 16px;
-      color: var(--temu-yellow);
-      font-size: 1.4rem;
-      font-weight: 800;
-      text-shadow: 0 2px 8px rgba(0,0,0,.5);
-    }
-    .coin-particle {
-      position: absolute;
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #ffe066, #f5a800, #b87000);
-      box-shadow: inset -3px -3px 6px rgba(0,0,0,.3), inset 2px 2px 4px rgba(255,255,200,.4);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 800; color: #7a4a00;
-      animation: coinFall var(--dur) cubic-bezier(.25,.46,.45,.94) forwards;
-      will-change: transform, opacity;
-    }
-    .coin-particle::after {
-      content: '\20A9';
-      font-size: 12px;
-      font-weight: 900;
-      color: #7a4a00;
-    }
-    @keyframes coinFall {
-      0%   { transform: translateY(0) rotateY(0deg) rotate(var(--spin)); opacity: 1; }
-      80%  { opacity: 1; }
-      100% { transform: translateY(var(--fall)) rotateY(540deg) rotate(calc(var(--spin) + 180deg)); opacity: 0; }
-    }
-    .spark {
-      position: absolute;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--temu-yellow);
-      animation: sparkBurst .5s ease-out forwards;
-      pointer-events: none;
-    }
-    @keyframes sparkBurst {
-      0%   { transform: translate(0,0) scale(1); opacity: 1; }
-      100% { transform: translate(var(--sx), var(--sy)) scale(0); opacity: 0; }
-    }
-    .gift-scene {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
-      padding: 20px 0;
-    }
-    .gift-box {
-      width: 140px;
-      height: 140px;
-      position: relative;
-      cursor: pointer;
-      perspective: 600px;
-    }
-    .gift-lid {
-      position: absolute;
-      top: 0; left: -6px;
-      width: 152px; height: 46px;
-      background: linear-gradient(135deg, #e53935, #c62828);
-      border-radius: 8px 8px 4px 4px;
-      box-shadow: 0 4px 12px rgba(0,0,0,.2);
-      transform-origin: center top;
-      transition: transform .6s cubic-bezier(.34,1.56,.64,1);
-      z-index: 3;
-    }
-    .gift-lid::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 20px; height: 100%;
-      background: rgba(255,255,255,.25);
-      border-radius: 4px;
-    }
+    .coin-score { position: absolute; top: 16px; right: 16px; color: var(--temu-yellow); font-size: 1.4rem; font-weight: 800; text-shadow: 0 2px 8px rgba(0,0,0,.5); }
+    .coin-particle { position: absolute; width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #ffe066, #f5a800, #b87000); box-shadow: inset -3px -3px 6px rgba(0,0,0,.3), inset 2px 2px 4px rgba(255,255,200,.4); animation: coinFall var(--dur) cubic-bezier(.25,.46,.45,.94) forwards; will-change: transform, opacity; }
+    .coin-particle::after { content: '\20A9'; font-size: 12px; font-weight: 900; color: #7a4a00; display: flex; align-items: center; justify-content: center; height: 100%; }
+    @keyframes coinFall { 0% { transform: translateY(0) rotateY(0deg) rotate(var(--spin)); opacity: 1; } 80% { opacity: 1; } 100% { transform: translateY(var(--fall)) rotateY(540deg) rotate(calc(var(--spin) + 180deg)); opacity: 0; } }
+    .spark { position: absolute; width: 6px; height: 6px; border-radius: 50%; animation: sparkBurst .5s ease-out forwards; pointer-events: none; }
+    @keyframes sparkBurst { 0% { transform: translate(0,0) scale(1); opacity: 1; } 100% { transform: translate(var(--sx), var(--sy)) scale(0); opacity: 0; } }
+    /* ── GIFT BOX ── */
+    .gift-scene { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 20px 0; }
+    .gift-box { width: 140px; height: 140px; position: relative; cursor: pointer; perspective: 600px; }
+    .gift-lid { position: absolute; top: 0; left: -6px; width: 152px; height: 46px; background: linear-gradient(135deg, #e53935, #c62828); border-radius: 8px 8px 4px 4px; box-shadow: 0 4px 12px rgba(0,0,0,.2); transform-origin: center top; transition: transform .6s cubic-bezier(.34,1.56,.64,1); z-index: 3; }
+    .gift-lid::after { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 20px; height: 100%; background: rgba(255,255,255,.25); border-radius: 4px; }
     .bow { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); z-index: 4; }
-    .bow-left, .bow-right {
-      display: inline-block;
-      width: 32px; height: 22px;
-      background: var(--temu-yellow);
-      border-radius: 50% 0;
-      transform-origin: right bottom;
-      transition: transform .5s ease;
-    }
+    .bow-left, .bow-right { display: inline-block; width: 32px; height: 22px; background: var(--temu-yellow); border-radius: 50% 0; transform-origin: right bottom; transition: transform .5s ease; }
     .bow-right { border-radius: 0 50%; transform-origin: left bottom; margin-left: -6px; }
-    .bow-knot {
-      width: 14px; height: 14px;
-      background: var(--temu-yellow);
-      border-radius: 50%;
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%,-50%);
-      z-index: 5;
-    }
-    .gift-body {
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 140px; height: 104px;
-      background: linear-gradient(135deg, #ef5350, #b71c1c);
-      border-radius: 4px 4px 12px 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,.2);
-      overflow: hidden;
-    }
-    .gift-body::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 20px; height: 100%;
-      background: rgba(255,255,255,.15);
-    }
-    .gift-reward {
-      position: absolute;
-      top: -60px; left: 50%;
-      transform: translateX(-50%) scale(0);
-      background: var(--temu-yellow);
-      color: #7a4a00;
-      font-weight: 800;
-      font-size: 1rem;
-      padding: 10px 18px;
-      border-radius: 20px;
-      white-space: nowrap;
-      box-shadow: 0 4px 16px rgba(255,214,0,.5);
-      transition: transform .4s cubic-bezier(.34,1.56,.64,1);
-      z-index: 10;
-    }
-    .gift-box.opened .gift-lid     { transform: rotateX(-130deg); }
-    .gift-box.opened .bow-left     { transform: rotate(-40deg); }
-    .gift-box.opened .bow-right    { transform: rotate(40deg); }
-    .gift-box.opened .gift-reward  { transform: translateX(-50%) scale(1); }
-    .confetti-container {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      overflow: visible;
-    }
-    .conf-piece {
-      position: absolute;
-      width: 10px; height: 10px;
-      opacity: 0;
-      animation: confettiFly 1.2s ease-out forwards;
-    }
-    @keyframes confettiFly {
-      0%   { transform: translate(0,0) rotate(0deg) scale(1); opacity: 1; }
-      100% { transform: translate(var(--cx), var(--cy)) rotate(var(--cr)) scale(0.3); opacity: 0; }
-    }
-    .gift-instruction {
-      font-size: .85rem;
-      color: #888;
-      text-align: center;
-    }
-    .skeleton-demo {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .skeleton-card {
-      background: #fff;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      padding: 16px;
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-    }
-    .sk {
-      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-      background-size: 200% 100%;
-      border-radius: 8px;
-      animation: shimmer 1.6s infinite;
-    }
-    @keyframes shimmer {
-      0%   { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-    .sk-img   { width: 80px; height: 80px; border-radius: 12px; flex-shrink: 0; }
+    .bow-knot { width: 14px; height: 14px; background: var(--temu-yellow); border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 5; }
+    .gift-body { position: absolute; bottom: 0; left: 0; width: 140px; height: 104px; background: linear-gradient(135deg, #ef5350, #b71c1c); border-radius: 4px 4px 12px 12px; box-shadow: 0 6px 20px rgba(0,0,0,.2); overflow: hidden; }
+    .gift-body::after { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 20px; height: 100%; background: rgba(255,255,255,.15); }
+    .gift-reward { position: absolute; top: -60px; left: 50%; transform: translateX(-50%) scale(0); background: var(--temu-yellow); color: #7a4a00; font-weight: 800; font-size: 1rem; padding: 10px 18px; border-radius: 20px; white-space: nowrap; box-shadow: 0 4px 16px rgba(255,214,0,.5); transition: transform .4s cubic-bezier(.34,1.56,.64,1); z-index: 10; }
+    .gift-box.opened .gift-lid { transform: rotateX(-130deg); }
+    .gift-box.opened .bow-left { transform: rotate(-40deg); }
+    .gift-box.opened .bow-right { transform: rotate(40deg); }
+    .gift-box.opened .gift-reward { transform: translateX(-50%) scale(1); }
+    .confetti-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+    .conf-piece { position: absolute; width: 10px; height: 10px; opacity: 0; animation: confettiFly 1.2s ease-out forwards; }
+    @keyframes confettiFly { 0% { transform: translate(0,0) rotate(0deg) scale(1); opacity: 1; } 100% { transform: translate(var(--cx), var(--cy)) rotate(var(--cr)) scale(0.3); opacity: 0; } }
+    .gift-instruction { font-size: .85rem; color: #888; text-align: center; }
+    /* ── SKELETON ── */
+    .skeleton-demo { display: flex; flex-direction: column; gap: 16px; }
+    .skeleton-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); padding: 16px; display: flex; gap: 14px; align-items: flex-start; }
+    .sk { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; border-radius: 8px; animation: shimmer 1.6s infinite; }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .sk-img { width: 80px; height: 80px; border-radius: 12px; flex-shrink: 0; }
     .sk-lines { flex: 1; display: flex; flex-direction: column; gap: 10px; padding-top: 4px; }
-    .sk-line  { height: 14px; }
-    .sk-line.w60 { width: 60%; }
-    .sk-line.w80 { width: 80%; }
-    .sk-line.w40 { width: 40%; }
-    .real-card {
-      background: #fff;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      padding: 16px;
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity .5s ease, transform .5s ease;
-    }
+    .sk-line { height: 14px; }
+    .sk-line.w60 { width: 60%; } .sk-line.w80 { width: 80%; } .sk-line.w40 { width: 40%; }
+    .real-card { background: #fff; border-radius: 16px; box-shadow: var(--shadow); padding: 16px; display: flex; gap: 14px; align-items: flex-start; opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; }
     .real-card.loaded { opacity: 1; transform: none; }
-    .real-img {
-      width: 80px; height: 80px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #ffcc80, #ff7043);
-      flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2rem;
-    }
+    .real-img { width: 80px; height: 80px; border-radius: 12px; background: linear-gradient(135deg, #ffcc80, #ff7043); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
     .real-info { flex: 1; }
     .real-name { font-weight: 700; margin-bottom: 4px; }
     .real-price { color: var(--temu-orange); font-weight: 800; font-size: 1.1rem; }
-    .real-old   { color: #bbb; text-decoration: line-through; font-size: .8rem; }
-    .real-badge {
-      display: inline-block;
-      background: var(--temu-red);
-      color: #fff;
-      font-size: .7rem;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 99px;
-      margin-top: 6px;
-    }
+    .real-old { color: #bbb; text-decoration: line-through; font-size: .8rem; }
+    .real-badge { display: inline-block; background: var(--temu-red); color: #fff; font-size: .7rem; font-weight: 700; padding: 2px 7px; border-radius: 99px; margin-top: 6px; }
     .skeleton-controls { display: flex; gap: 10px; flex-wrap: wrap; }
-    .products-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    .product-card {
-      background: #fff;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      position: relative;
-    }
-    .product-thumb {
-      height: 110px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3rem;
-    }
+    /* ── SPRING BUTTON ── */
+    .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .product-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+    .product-thumb { height: 110px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
     .p1 .product-thumb { background: linear-gradient(135deg, #fce4ec, #f48fb1); }
     .p2 .product-thumb { background: linear-gradient(135deg, #e8f5e9, #81c784); }
     .p3 .product-thumb { background: linear-gradient(135deg, #e3f2fd, #64b5f6); }
@@ -420,121 +97,226 @@
     .product-info { padding: 10px 12px 12px; }
     .product-name { font-size: .82rem; font-weight: 600; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .product-price { color: var(--temu-orange); font-weight: 800; font-size: 1rem; }
-    .add-cart-btn {
-      width: 100%;
-      margin-top: 8px;
-      padding: 8px;
-      background: linear-gradient(135deg, var(--temu-orange), var(--temu-red));
-      color: #fff;
-      border: none;
-      border-radius: 99px;
-      font-size: .8rem;
-      font-weight: 700;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transform: scale(1);
-      transition: transform .1s;
-      -webkit-tap-highlight-color: transparent;
-    }
+    .add-cart-btn { width: 100%; margin-top: 8px; padding: 8px; background: linear-gradient(135deg, var(--temu-orange), var(--temu-red)); color: #fff; border: none; border-radius: 99px; font-size: .8rem; font-weight: 700; cursor: pointer; position: relative; overflow: hidden; transform: scale(1); transition: transform .1s; -webkit-tap-highlight-color: transparent; }
     .add-cart-btn:active { transform: scale(.92); }
-    .add-cart-btn.spring {
-      animation: springPop .45s cubic-bezier(.34,1.56,.64,1);
-    }
-    @keyframes springPop {
-      0%   { transform: scale(.88); }
-      50%  { transform: scale(1.12); }
-      75%  { transform: scale(.96); }
-      100% { transform: scale(1); }
-    }
-    .btn-ripple {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255,255,255,.4);
-      transform: scale(0);
-      animation: rippleOut .5s ease-out forwards;
-      pointer-events: none;
-    }
-    @keyframes rippleOut {
-      to { transform: scale(4); opacity: 0; }
-    }
-    .cart-bar {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .cart-icon-wrap {
-      position: relative;
-      font-size: 1.8rem;
-      line-height: 1;
-    }
-    .cart-badge {
-      position: absolute;
-      top: -6px; right: -8px;
-      background: var(--temu-red);
-      color: #fff;
-      font-size: .65rem;
-      font-weight: 800;
-      min-width: 18px; height: 18px;
-      border-radius: 99px;
-      display: flex; align-items: center; justify-content: center;
-      padding: 0 4px;
-      box-shadow: 0 2px 6px rgba(229,57,53,.5);
-      transition: transform .3s cubic-bezier(.34,1.56,.64,1);
-    }
+    .add-cart-btn.spring { animation: springPop .45s cubic-bezier(.34,1.56,.64,1); }
+    @keyframes springPop { 0% { transform: scale(.88); } 50% { transform: scale(1.12); } 75% { transform: scale(.96); } 100% { transform: scale(1); } }
+    .btn-ripple { position: absolute; border-radius: 50%; background: rgba(255,255,255,.4); transform: scale(0); animation: rippleOut .5s ease-out forwards; pointer-events: none; }
+    @keyframes rippleOut { to { transform: scale(4); opacity: 0; } }
+    .cart-bar { background: #fff; border-radius: 16px; box-shadow: var(--shadow); padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
+    .cart-icon-wrap { position: relative; font-size: 1.8rem; line-height: 1; }
+    .cart-badge { position: absolute; top: -6px; right: -8px; background: var(--temu-red); color: #fff; font-size: .65rem; font-weight: 800; min-width: 18px; height: 18px; border-radius: 99px; display: flex; align-items: center; justify-content: center; padding: 0 4px; box-shadow: 0 2px 6px rgba(229,57,53,.5); }
     .cart-badge.bounce { animation: badgeBounce .4s cubic-bezier(.34,1.56,.64,1); }
-    @keyframes badgeBounce {
-      0%,100% { transform: scale(1); }
-      50%      { transform: scale(1.5); }
-    }
+    @keyframes badgeBounce { 0%,100% { transform: scale(1); } 50% { transform: scale(1.5); } }
     .cart-label { font-size: .85rem; color: #888; }
     .cart-total { margin-left: auto; font-weight: 800; font-size: 1.1rem; color: var(--temu-orange); }
-    .fly-item {
-      position: fixed;
-      font-size: 1.6rem;
-      pointer-events: none;
-      z-index: 9999;
-      animation: flyToCart var(--fly-dur) cubic-bezier(.4,0,.2,1) forwards;
-      will-change: transform, opacity;
+    .fly-item { position: fixed; font-size: 1.6rem; pointer-events: none; z-index: 9999; animation: flyToCart var(--fly-dur) cubic-bezier(.4,0,.2,1) forwards; will-change: transform, opacity; }
+    @keyframes flyToCart { 0% { transform: translate(0,0) scale(1) rotate(0deg); opacity: 1; } 60% { opacity: 1; } 100% { transform: translate(var(--fx), var(--fy)) scale(.2) rotate(180deg); opacity: 0; } }
+
+    /* ══════════════════════════════════════
+       6. STATS COUNTER
+    ══════════════════════════════════════ */
+    .stats-scene {
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      border-radius: 20px;
+      padding: 28px 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 20px;
     }
-    @keyframes flyToCart {
-      0%   { transform: translate(0,0) scale(1) rotate(0deg); opacity: 1; }
-      60%  { opacity: 1; }
-      100% { transform: translate(var(--fx), var(--fy)) scale(.2) rotate(180deg); opacity: 0; }
+    .stat-box {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      padding: 18px 12px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s;
     }
-    .temu-btn {
-      background: linear-gradient(135deg, var(--temu-orange), var(--temu-red));
+    .stat-box.lit { border-color: var(--stat-color); box-shadow: 0 0 20px rgba(var(--stat-rgb),.3); }
+    .stat-icon { font-size: 1.6rem; margin-bottom: 6px; display: block; }
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 900;
       color: #fff;
-      border: none;
+      display: block;
+      line-height: 1;
+      text-shadow: 0 0 20px var(--stat-color), 0 0 40px var(--stat-color);
+      transition: text-shadow .3s;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-unit { font-size: 1.2rem; font-weight: 900; color: var(--stat-color); }
+    .stat-label { font-size: .72rem; color: rgba(255,255,255,.6); margin-top: 4px; display: block; }
+    .stat-pulse {
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      opacity: 0;
+      background: radial-gradient(circle, rgba(var(--stat-rgb),.25) 0%, transparent 70%);
+      animation: statPulse .6s ease-out forwards;
+    }
+    @keyframes statPulse { 0% { opacity: 1; transform: scale(.8); } 100% { opacity: 0; transform: scale(1.4); } }
+    .stats-btn-row { display: flex; gap: 10px; justify-content: center; }
+
+    /* ══════════════════════════════════════
+       7. NEON TYPEWRITER
+    ══════════════════════════════════════ */
+    .tw-stage {
+      background: #050510;
+      border-radius: 20px;
+      padding: 36px 20px;
+      text-align: center;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .tw-stage::before {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(255,105,0,.15) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      animation: twAura 3s ease-in-out infinite alternate;
+    }
+    @keyframes twAura { 0% { opacity: .5; transform: translate(-50%,-50%) scale(1); } 100% { opacity: 1; transform: translate(-50%,-50%) scale(1.3); } }
+    .tw-badge {
+      background: rgba(255,105,0,.15);
+      border: 1px solid rgba(255,105,0,.4);
+      color: var(--temu-orange);
+      font-size: .72rem;
+      font-weight: 800;
+      padding: 4px 12px;
       border-radius: 99px;
-      padding: 13px 32px;
-      font-size: .95rem;
-      font-weight: 700;
+      letter-spacing: .05em;
+      position: relative;
+    }
+    .tw-display {
+      font-size: 1.65rem;
+      font-weight: 900;
+      line-height: 1.2;
+      min-height: 4rem;
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(90deg, #ff6900, #ff3cac, #00d2ff, #ffd600);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradShift 4s linear infinite;
+      filter: drop-shadow(0 0 12px rgba(255,105,0,.6));
+    }
+    @keyframes gradShift { 0% { background-position: 0% 50%; } 100% { background-position: 300% 50%; } }
+    .tw-cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1.5rem;
+      background: var(--temu-orange);
+      vertical-align: middle;
+      margin-left: 2px;
+      animation: cursorBlink .7s step-end infinite;
+      border-radius: 2px;
+      box-shadow: 0 0 8px var(--temu-orange);
+      position: relative;
+      z-index: 1;
+    }
+    @keyframes cursorBlink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+    .tw-sub {
+      font-size: .82rem;
+      color: rgba(255,255,255,.45);
+      position: relative;
+      z-index: 1;
+    }
+    .tw-dots {
+      display: flex;
+      gap: 6px;
+      position: relative;
+      z-index: 1;
+    }
+    .tw-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.2);
+      transition: background .3s;
       cursor: pointer;
-      box-shadow: 0 4px 16px rgba(255,105,0,.35);
-      transition: transform .15s, box-shadow .15s;
-      -webkit-tap-highlight-color: transparent;
     }
-    .temu-btn:hover  { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,105,0,.45); }
-    .temu-btn:active { transform: scale(.96); }
-    .toast {
-      position: fixed;
-      bottom: 32px; left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: #222;
-      color: #fff;
-      padding: 12px 24px;
-      border-radius: 99px;
-      font-size: .9rem;
-      font-weight: 600;
-      transition: transform .35s cubic-bezier(.34,1.56,.64,1);
-      z-index: 9999;
+    .tw-dot.active { background: var(--temu-orange); box-shadow: 0 0 6px var(--temu-orange); }
+
+    /* ══════════════════════════════════════
+       8. 3D TILT CARDS
+    ══════════════════════════════════════ */
+    .tilt-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .tilt-card {
+      position: relative;
+      border-radius: 20px;
+      padding: 22px;
+      overflow: hidden;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+      transition: transform .1s ease-out, box-shadow .3s;
+      will-change: transform;
+    }
+    .tilt-card:hover { box-shadow: 0 20px 60px rgba(0,0,0,.3); }
+    .tc1 { background: linear-gradient(135deg, #1a1a2e, #16213e); border: 1px solid rgba(99,179,237,.2); }
+    .tc2 { background: linear-gradient(135deg, #0d1b2a, #1b263b); border: 1px solid rgba(255,105,0,.2); }
+    .tc3 { background: linear-gradient(135deg, #1a0533, #2d1b69); border: 1px solid rgba(168,85,247,.2); }
+    .tilt-shine {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.12) 0%, transparent 60%);
       pointer-events: none;
+      transition: opacity .3s;
+      opacity: 0;
+      border-radius: 20px;
     }
+    .tilt-card:hover .tilt-shine { opacity: 1; }
+    .tilt-icon { font-size: 2.2rem; margin-bottom: 10px; display: block; filter: drop-shadow(0 0 12px currentColor); }
+    .tilt-title { font-size: 1rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .tilt-desc { font-size: .8rem; color: rgba(255,255,255,.55); line-height: 1.5; }
+    .tilt-badge {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: .7rem;
+      font-weight: 800;
+    }
+    .tc1 .tilt-badge { background: rgba(99,179,237,.15); color: #63b3ed; border: 1px solid rgba(99,179,237,.3); }
+    .tc2 .tilt-badge { background: rgba(255,105,0,.15); color: var(--temu-orange); border: 1px solid rgba(255,105,0,.3); }
+    .tc3 .tilt-badge { background: rgba(168,85,247,.15); color: #a855f7; border: 1px solid rgba(168,85,247,.3); }
+    .tilt-bar {
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 3px;
+      width: 0;
+      border-radius: 0 0 0 20px;
+      transition: width .8s cubic-bezier(.34,1.56,.64,1);
+    }
+    .tc1 .tilt-bar { background: linear-gradient(90deg, #63b3ed, #4299e1); }
+    .tc2 .tilt-bar { background: linear-gradient(90deg, var(--temu-orange), var(--temu-red)); }
+    .tc3 .tilt-bar { background: linear-gradient(90deg, #a855f7, #7c3aed); }
+    .tilt-card:hover .tilt-bar { width: 100%; }
+    .tilt-hint { font-size: .78rem; color: #aaa; text-align: center; }
+
+    /* ── SHARED ── */
+    .temu-btn { background: linear-gradient(135deg, var(--temu-orange), var(--temu-red)); color: #fff; border: none; border-radius: 99px; padding: 13px 32px; font-size: .95rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(255,105,0,.35); transition: transform .15s, box-shadow .15s; -webkit-tap-highlight-color: transparent; }
+    .temu-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,105,0,.45); }
+    .temu-btn:active { transform: scale(.96); }
+    .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px); background: #222; color: #fff; padding: 12px 24px; border-radius: 99px; font-size: .9rem; font-weight: 600; transition: transform .35s cubic-bezier(.34,1.56,.64,1); z-index: 9999; pointer-events: none; }
     .toast.show { transform: translateX(-50%) translateY(0); }
   </style>
 </head>
@@ -542,7 +324,7 @@
 
 <header>
   <h1>&#x1F6CD; Temu-Style Animations</h1>
-  <p>5가지 이커머스 핵심 애니메이션 데모</p>
+  <p>8가지 이커머스 &amp; SaaS 랜딩 애니메이션 데모</p>
 </header>
 
 <nav class="tabs" role="tablist">
@@ -550,17 +332,24 @@
   <button class="tab-btn" data-tab="coin">&#x1FA99; 코인비</button>
   <button class="tab-btn" data-tab="gift">&#x1F381; 선물상자</button>
   <button class="tab-btn" data-tab="skeleton">&#x26A1; 스켈레톤</button>
-  <button class="tab-btn" data-tab="spring">&#x1F6D2; 스프링버튼</button>
+  <button class="tab-btn" data-tab="spring">&#x1F6D2; 스프링</button>
+  <button class="tab-btn" data-tab="stats">&#x1F522; 숫자카운터</button>
+  <button class="tab-btn" data-tab="typewriter">&#x2728; 타이핑</button>
+  <button class="tab-btn" data-tab="tilt">&#x1F3A6; 3D카드</button>
 </nav>
 
 <section class="showcase-overview" aria-label="구현된 애니메이션 종류">
-  <article class="overview-card"><strong>게임화 룰렛</strong><span>Canvas 드로잉과 ease-out 회전으로 당첨 연출을 구현합니다.</span></article>
-  <article class="overview-card"><strong>보상 파티클</strong><span>클릭 위치 기반 코인 비와 스파크로 즉시 보상감을 줍니다.</span></article>
-  <article class="overview-card"><strong>선물 개봉</strong><span>3D CSS transform과 confetti burst로 이벤트 팝업을 표현합니다.</span></article>
-  <article class="overview-card"><strong>스켈레톤 로딩</strong><span>shimmer placeholder에서 상품 카드로 자연스럽게 전환합니다.</span></article>
-  <article class="overview-card"><strong>마이크로 인터랙션</strong><span>스프링 버튼, ripple, 장바구니 fly-to-cart를 결합합니다.</span></article>
+  <article class="overview-card"><strong>게임화 룰렛</strong><span>Canvas ease-out 회전으로 당첨 연출</span></article>
+  <article class="overview-card"><strong>보상 파티클</strong><span>클릭 위치 기반 코인 비 효과</span></article>
+  <article class="overview-card"><strong>선물 개봉</strong><span>3D CSS transform + confetti</span></article>
+  <article class="overview-card"><strong>스켈레톤</strong><span>shimmer → 실카드 fadeIn</span></article>
+  <article class="overview-card"><strong>스프링 버튼</strong><span>탄성 물리 + 장바구니 fly</span></article>
+  <article class="overview-card"><strong>숫자 카운터</strong><span>네온 글로우 통계 카운트업</span></article>
+  <article class="overview-card"><strong>네온 타이핑</strong><span>그라디언트 헤드라인 타이핑</span></article>
+  <article class="overview-card"><strong>3D 틸트 카드</strong><span>마우스 따라 기울어지는 카드</span></article>
 </section>
 
+<!-- ══ 1. ROULETTE ══ -->
 <section id="tab-roulette" class="panel active">
   <p class="panel-title">&#x1F3A1; 룰렛 스핀 <span class="tech-chip">Canvas</span></p>
   <p class="panel-desc">Canvas로 그린 룰렛 — 클릭 시 관성 회전 후 상품 당첨 연출</p>
@@ -575,26 +364,23 @@
   </div>
 </section>
 
+<!-- ══ 2. COIN RAIN ══ -->
 <section id="tab-coin" class="panel">
-  <p class="panel-title">&#x1FA99; 코인 비 (Coin Rain) <span class="tech-chip">Particle</span></p>
+  <p class="panel-title">&#x1FA99; 코인 비 <span class="tech-chip">Particle</span></p>
   <p class="panel-desc">터치/클릭 위치에서 코인 파티클이 쏟아지는 보상 연출</p>
   <div id="coinStage">
     <div class="coin-score" id="coinScore">&#x20A9; 0</div>
-    <div class="coin-tap-hint" id="coinHint">
-      <span>&#x1F446;</span>화면을 탭하면 코인이 쏟아집니다!
-    </div>
+    <div class="coin-tap-hint" id="coinHint"><span>&#x1F446;</span>화면을 탭하면 코인이 쏟아집니다!</div>
   </div>
 </section>
 
+<!-- ══ 3. GIFT BOX ══ -->
 <section id="tab-gift" class="panel">
   <p class="panel-title">&#x1F381; 선물 상자 개봉 <span class="tech-chip">3D CSS</span></p>
   <p class="panel-desc">3D CSS Transform으로 뚜껑이 열리며 보상이 튀어 나오는 연출</p>
   <div class="gift-scene">
     <div class="gift-box" id="giftBox">
-      <div class="bow">
-        <span class="bow-left"></span><span class="bow-right"></span>
-        <span class="bow-knot"></span>
-      </div>
+      <div class="bow"><span class="bow-left"></span><span class="bow-right"></span><span class="bow-knot"></span></div>
       <div class="gift-lid"></div>
       <div class="gift-body"></div>
       <div class="gift-reward" id="giftReward">&#x1F389; 쿠폰 3,000원 획득!</div>
@@ -605,9 +391,10 @@
   </div>
 </section>
 
+<!-- ══ 4. SKELETON ══ -->
 <section id="tab-skeleton" class="panel">
   <p class="panel-title">&#x26A1; 스켈레톤 로딩 <span class="tech-chip">Shimmer</span></p>
-  <p class="panel-desc">Shimmer 애니메이션 스켈레톤 → 실제 콘텐츠 페이드인 전환</p>
+  <p class="panel-desc">Shimmer 스켈레톤 → 실제 콘텐츠 페이드인 전환</p>
   <div class="skeleton-demo">
     <div id="skeletonArea"></div>
     <div class="skeleton-controls">
@@ -616,318 +403,371 @@
   </div>
 </section>
 
+<!-- ══ 5. SPRING BUTTON ══ -->
 <section id="tab-spring" class="panel">
   <p class="panel-title">&#x1F6D2; 스프링 버튼 + 장바구니 플라이 <span class="tech-chip">Spring</span></p>
   <p class="panel-desc">탄성 물리 버튼 + 아이템이 장바구니로 날아가는 마이크로 인터랙션</p>
   <div class="products-grid">
-    <div class="product-card p1">
-      <div class="product-thumb">&#x1F45F;</div>
-      <div class="product-info">
-        <div class="product-name">스니커즈</div>
-        <div class="product-price">&#x20A9;12,900</div>
-        <button class="add-cart-btn" data-emoji="&#x1F45F;" data-price="12900">장바구니 담기</button>
-      </div>
-    </div>
-    <div class="product-card p2">
-      <div class="product-thumb">&#x1F3A7;</div>
-      <div class="product-info">
-        <div class="product-name">무선 이어폰</div>
-        <div class="product-price">&#x20A9;8,500</div>
-        <button class="add-cart-btn" data-emoji="&#x1F3A7;" data-price="8500">장바구니 담기</button>
-      </div>
-    </div>
-    <div class="product-card p3">
-      <div class="product-thumb">&#x231A;</div>
-      <div class="product-info">
-        <div class="product-name">스마트워치</div>
-        <div class="product-price">&#x20A9;24,000</div>
-        <button class="add-cart-btn" data-emoji="&#x231A;" data-price="24000">장바구니 담기</button>
-      </div>
-    </div>
-    <div class="product-card p4">
-      <div class="product-thumb">&#x1F576;&#xFE0F;</div>
-      <div class="product-info">
-        <div class="product-name">선글라스</div>
-        <div class="product-price">&#x20A9;5,600</div>
-        <button class="add-cart-btn" data-emoji="&#x1F576;&#xFE0F;" data-price="5600">장바구니 담기</button>
-      </div>
-    </div>
+    <div class="product-card p1"><div class="product-thumb">&#x1F45F;</div><div class="product-info"><div class="product-name">스니커즈</div><div class="product-price">&#x20A9;12,900</div><button class="add-cart-btn" data-emoji="&#x1F45F;" data-price="12900">장바구니 담기</button></div></div>
+    <div class="product-card p2"><div class="product-thumb">&#x1F3A7;</div><div class="product-info"><div class="product-name">무선 이어폰</div><div class="product-price">&#x20A9;8,500</div><button class="add-cart-btn" data-emoji="&#x1F3A7;" data-price="8500">장바구니 담기</button></div></div>
+    <div class="product-card p3"><div class="product-thumb">&#x231A;</div><div class="product-info"><div class="product-name">스마트워치</div><div class="product-price">&#x20A9;24,000</div><button class="add-cart-btn" data-emoji="&#x231A;" data-price="24000">장바구니 담기</button></div></div>
+    <div class="product-card p4"><div class="product-thumb">&#x1F576;&#xFE0F;</div><div class="product-info"><div class="product-name">선글라스</div><div class="product-price">&#x20A9;5,600</div><button class="add-cart-btn" data-emoji="&#x1F576;&#xFE0F;" data-price="5600">장바구니 담기</button></div></div>
   </div>
   <div class="cart-bar" id="cartBar">
-    <div class="cart-icon-wrap">
-      &#x1F6D2;
-      <div class="cart-badge" id="cartBadge">0</div>
-    </div>
+    <div class="cart-icon-wrap">&#x1F6D2;<div class="cart-badge" id="cartBadge">0</div></div>
     <span class="cart-label">장바구니</span>
     <span class="cart-total" id="cartTotal">&#x20A9;0</span>
   </div>
 </section>
 
+<!-- ══ 6. STATS COUNTER ══ -->
+<section id="tab-stats" class="panel">
+  <p class="panel-title">&#x1F522; 숫자 카운터 <span class="tech-chip">SaaS</span></p>
+  <p class="panel-desc">SaaS 랜딩 필수 — 통계 수치가 네온 글로우와 함께 카운트업</p>
+  <div class="stats-scene">
+    <div class="stat-box" style="--stat-color:#63b3ed;--stat-rgb:99,179,237">
+      <span class="stat-icon">&#x1F464;</span>
+      <span class="stat-num" id="s1">0</span><span class="stat-unit" style="color:#63b3ed">+</span>
+      <span class="stat-label">활성 고객</span>
+    </div>
+    <div class="stat-box" style="--stat-color:#ff6900;--stat-rgb:255,105,0">
+      <span class="stat-icon">&#x23F1;&#xFE0F;</span>
+      <span class="stat-num" id="s2">0</span><span class="stat-unit" style="color:#ff6900">%</span>
+      <span class="stat-label">업무 시간 절감</span>
+    </div>
+    <div class="stat-box" style="--stat-color:#68d391;--stat-rgb:104,211,145">
+      <span class="stat-icon">&#x26A1;</span>
+      <span class="stat-num" id="s3">0</span><span class="stat-unit" style="color:#68d391">ms</span>
+      <span class="stat-label">평균 응답속도</span>
+    </div>
+    <div class="stat-box" style="--stat-color:#f6ad55;--stat-rgb:246,173,85">
+      <span class="stat-icon">&#x2B50;</span>
+      <span class="stat-num" id="s4">0</span><span class="stat-unit" style="color:#f6ad55">%</span>
+      <span class="stat-label">고객 만족도</span>
+    </div>
+  </div>
+  <div class="stats-btn-row">
+    <button class="temu-btn" id="statsRunBtn">&#x1F680; 카운트 시작!</button>
+  </div>
+</section>
+
+<!-- ══ 7. NEON TYPEWRITER ══ -->
+<section id="tab-typewriter" class="panel">
+  <p class="panel-title">&#x2728; 네온 타이핑 <span class="tech-chip">SaaS Hero</span></p>
+  <p class="panel-desc">SaaS 히어로 섹션 — 그라디언트 헤드라인이 타이핑되며 나타나는 효과</p>
+  <div class="tw-stage">
+    <div class="tw-badge">&#x1F525; AI-Powered Platform</div>
+    <div>
+      <span class="tw-display" id="twDisplay"></span><span class="tw-cursor"></span>
+    </div>
+    <p class="tw-sub">세계 50,000+ 팀이 선택한 업무 자동화 솔루션</p>
+    <div class="tw-dots" id="twDots"></div>
+  </div>
+  <div style="text-align:center">
+    <button class="temu-btn" id="twRestartBtn">&#x1F504; 다시 재생</button>
+  </div>
+</section>
+
+<!-- ══ 8. 3D TILT CARDS ══ -->
+<section id="tab-tilt" class="panel">
+  <p class="panel-title">&#x1F3A6; 3D 틸트 카드 <span class="tech-chip">SaaS Feature</span></p>
+  <p class="panel-desc">SaaS 피처 섹션 — 마우스/터치 위치에 따라 카드가 3D로 기울며 빛 반사</p>
+  <div class="tilt-grid">
+    <div class="tilt-card tc1" data-tilt>
+      <div class="tilt-shine"></div>
+      <span class="tilt-icon" style="color:#63b3ed">&#x1F4CA;</span>
+      <div class="tilt-title">실시간 분석 대시보드</div>
+      <div class="tilt-desc">모든 핵심 지표를 한 화면에서 실시간으로 확인하세요. 데이터 기반 의사결정을 더 빠르게.</div>
+      <span class="tilt-badge">Analytics</span>
+      <div class="tilt-bar"></div>
+    </div>
+    <div class="tilt-card tc2" data-tilt>
+      <div class="tilt-shine"></div>
+      <span class="tilt-icon" style="color:#ff6900">&#x1F916;</span>
+      <div class="tilt-title">AI 자동화 워크플로우</div>
+      <div class="tilt-desc">반복 업무를 AI가 자동 처리합니다. 팀이 진짜 중요한 일에 집중할 수 있도록.</div>
+      <span class="tilt-badge">AI Powered</span>
+      <div class="tilt-bar"></div>
+    </div>
+    <div class="tilt-card tc3" data-tilt>
+      <div class="tilt-shine"></div>
+      <span class="tilt-icon" style="color:#a855f7">&#x1F512;</span>
+      <div class="tilt-title">엔터프라이즈급 보안</div>
+      <div class="tilt-desc">SOC2 인증, 256-bit 암호화, 제로 트러스트 아키텍처로 데이터를 안전하게.</div>
+      <span class="tilt-badge">Enterprise</span>
+      <div class="tilt-bar"></div>
+    </div>
+  </div>
+  <p class="tilt-hint">&#x1F5B1;&#xFE0F; 카드 위에 마우스를 올려보세요 (모바일: 탭)</p>
+</section>
+
 <div class="toast" id="toast"></div>
 
 <script>
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+/* ── TABS ── */
+document.querySelectorAll('.tab-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
     btn.classList.add('active');
     document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
   });
 });
-
 function showToast(msg) {
-  const t = document.getElementById('toast');
+  var t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2200);
+  setTimeout(function(){ t.classList.remove('show'); }, 2200);
 }
 
+/* ── 1. ROULETTE ── */
 (function() {
-  const canvas = document.getElementById('rouletteCanvas');
-  const ctx    = canvas.getContext('2d');
-  const prizes = [
-    { label: '1,000원', color: '#FF6900' },
-    { label: '쿠폰 5%', color: '#E53935' },
-    { label: '무료배송', color: '#43A047' },
-    { label: '랜덤박스', color: '#8E24AA' },
-    { label: '포인트 200', color: '#1E88E5' },
-    { label: '별점쿠폰',  color: '#F4511E' },
-    { label: '코인 50',   color: '#FFD600' },
-    { label: '꽝 (+응원)', color: '#546E7A' },
+  var canvas = document.getElementById('rouletteCanvas');
+  var ctx = canvas.getContext('2d');
+  var prizes = [
+    {label:'1,000원',color:'#FF6900'},{label:'쿠폰 5%',color:'#E53935'},
+    {label:'무료배송',color:'#43A047'},{label:'랜덤박스',color:'#8E24AA'},
+    {label:'포인트 200',color:'#1E88E5'},{label:'별점쿠폰',color:'#F4511E'},
+    {label:'코인 50',color:'#FFD600'},{label:'꽝(+응원)',color:'#546E7A'}
   ];
-  const N   = prizes.length;
-  const arc = (2 * Math.PI) / N;
-  let angle   = 0;
-  let spinning = false;
-
+  var N = prizes.length, arc = 2*Math.PI/N, angle = 0, spinning = false;
   function drawWheel(rot) {
-    const cx = canvas.width / 2, cy = canvas.height / 2, r = cx - 4;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    prizes.forEach((p, i) => {
-      const start = rot + i * arc - Math.PI / 2;
-      const end   = start + arc;
-      ctx.beginPath();
-      ctx.moveTo(cx, cy);
-      ctx.arc(cx, cy, r, start, end);
-      ctx.closePath();
-      ctx.fillStyle = p.color;
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(255,255,255,.35)';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-      ctx.save();
-      ctx.translate(cx, cy);
-      ctx.rotate(start + arc / 2);
-      ctx.textAlign = 'right';
-      ctx.fillStyle = '#fff';
-      ctx.font = 'bold 12px sans-serif';
-      ctx.shadowColor = 'rgba(0,0,0,.4)';
-      ctx.shadowBlur = 4;
-      ctx.fillText(p.label, r - 10, 5);
-      ctx.restore();
+    var cx=canvas.width/2, cy=canvas.height/2, r=cx-4;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    prizes.forEach(function(p,i){
+      var s=rot+i*arc-Math.PI/2, e=s+arc;
+      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,r,s,e); ctx.closePath();
+      ctx.fillStyle=p.color; ctx.fill();
+      ctx.strokeStyle='rgba(255,255,255,.35)'; ctx.lineWidth=2; ctx.stroke();
+      ctx.save(); ctx.translate(cx,cy); ctx.rotate(s+arc/2);
+      ctx.textAlign='right'; ctx.fillStyle='#fff'; ctx.font='bold 12px sans-serif';
+      ctx.shadowColor='rgba(0,0,0,.4)'; ctx.shadowBlur=4;
+      ctx.fillText(p.label,r-10,5); ctx.restore();
     });
   }
-
   drawWheel(angle);
-
-  document.getElementById('spinBtn').addEventListener('click', () => {
+  document.getElementById('spinBtn').addEventListener('click', function() {
     if (spinning) return;
     spinning = true;
     document.getElementById('rouletteResult').textContent = '돌리는 중...';
-    const extraSpins = (5 + Math.random() * 5) * 2 * Math.PI;
-    const targetAngle = angle + extraSpins;
-    const duration = 3500;
-    const start = performance.now();
-    const startAngle = angle;
-    function easeOut(t) { return 1 - Math.pow(1 - t, 4); }
-    function frame(now) {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      angle = startAngle + (targetAngle - startAngle) * easeOut(progress);
-      drawWheel(angle);
-      if (progress < 1) {
-        requestAnimationFrame(frame);
-      } else {
-        spinning = false;
-        const normalised = ((angle % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
-        const pointerAngle = (3 * Math.PI / 2 - normalised + 2 * Math.PI) % (2 * Math.PI);
-        const idx = Math.floor(pointerAngle / arc) % N;
-        document.getElementById('rouletteResult').textContent = '당첨: ' + prizes[idx].label;
-        showToast('당첨! ' + prizes[idx].label);
+    var extra=(5+Math.random()*5)*2*Math.PI, target=angle+extra, dur=3500, t0=performance.now(), a0=angle;
+    function easeOut(t){ return 1-Math.pow(1-t,4); }
+    function frame(now){
+      var p=Math.min((now-t0)/dur,1);
+      angle=a0+(target-a0)*easeOut(p); drawWheel(angle);
+      if(p<1){ requestAnimationFrame(frame); }
+      else {
+        spinning=false;
+        var n=((angle%(2*Math.PI))+2*Math.PI)%(2*Math.PI);
+        var pa=(3*Math.PI/2-n+2*Math.PI)%(2*Math.PI);
+        var idx=Math.floor(pa/arc)%N;
+        document.getElementById('rouletteResult').textContent='당첨: '+prizes[idx].label;
+        showToast('당첨! '+prizes[idx].label);
       }
     }
     requestAnimationFrame(frame);
   });
 })();
 
+/* ── 2. COIN RAIN ── */
 (function() {
-  const stage = document.getElementById('coinStage');
-  const hint  = document.getElementById('coinHint');
-  const scoreEl = document.getElementById('coinScore');
-  let total = 0;
-  let hintHidden = false;
-
-  function spawnCoins(x, y, count) {
-    count = count || 12;
-    if (!hintHidden) { hint.style.opacity = '0'; hintHidden = true; }
-    for (let s = 0; s < 8; s++) {
-      const spark = document.createElement('div');
-      spark.className = 'spark';
-      const sx = (Math.random() - .5) * 80 + 'px';
-      const sy = (Math.random() - .5) * 80 + 'px';
-      spark.style.cssText = 'left:'+x+'px;top:'+y+'px;--sx:'+sx+';--sy:'+sy+';background:hsl('+(40+Math.random()*30)+',100%,60%)';
-      stage.appendChild(spark);
-      spark.addEventListener('animationend', function(){ spark.remove(); });
+  var stage=document.getElementById('coinStage'), hint=document.getElementById('coinHint'), scoreEl=document.getElementById('coinScore');
+  var total=0, hintHidden=false;
+  function spawnCoins(x,y,count) {
+    count=count||12;
+    if(!hintHidden){hint.style.opacity='0';hintHidden=true;}
+    for(var s=0;s<8;s++){
+      var sp=document.createElement('div'); sp.className='spark';
+      var sx=(Math.random()-.5)*80+'px', sy=(Math.random()-.5)*80+'px';
+      sp.style.cssText='left:'+x+'px;top:'+y+'px;--sx:'+sx+';--sy:'+sy+';background:hsl('+(40+Math.random()*30)+',100%,60%)';
+      stage.appendChild(sp); sp.addEventListener('animationend',function(){sp.remove();});
     }
-    for (let i = 0; i < count; i++) {
-      const coin = document.createElement('div');
-      coin.className = 'coin-particle';
-      const fallDist = (180 + Math.random() * 140) + 'px';
-      const spinDeg  = ((Math.random() - .5) * 60) + 'deg';
-      const dur      = (.6 + Math.random() * .6) + 's';
-      const ox = x + (Math.random() - .5) * 60;
-      const oy = y + (Math.random() - .5) * 20;
-      coin.style.cssText = 'left:'+ox+'px;top:'+oy+'px;--fall:'+fallDist+';--spin:'+spinDeg+';--dur:'+dur+';transform:rotate('+spinDeg+');animation-delay:'+(Math.random()*.15)+'s';
-      stage.appendChild(coin);
-      coin.addEventListener('animationend', function(){ coin.remove(); });
+    for(var i=0;i<count;i++){
+      var coin=document.createElement('div'); coin.className='coin-particle';
+      var fd=(180+Math.random()*140)+'px', sd=((Math.random()-.5)*60)+'deg', dur=(.6+Math.random()*.6)+'s';
+      var ox=x+(Math.random()-.5)*60, oy=y+(Math.random()-.5)*20;
+      coin.style.cssText='left:'+ox+'px;top:'+oy+'px;--fall:'+fd+';--spin:'+sd+';--dur:'+dur+';transform:rotate('+sd+');animation-delay:'+(Math.random()*.15)+'s';
+      stage.appendChild(coin); coin.addEventListener('animationend',function(){coin.remove();});
     }
-    const reward = Math.floor(Math.random() * 500 + 100);
-    total += reward;
-    scoreEl.textContent = '₩ ' + total.toLocaleString();
+    total+=Math.floor(Math.random()*500+100);
+    scoreEl.textContent='₩ '+total.toLocaleString();
   }
-
-  stage.addEventListener('click', function(e) {
-    const r = stage.getBoundingClientRect();
-    spawnCoins(e.clientX - r.left, e.clientY - r.top);
-  });
-  stage.addEventListener('touchstart', function(e) {
-    e.preventDefault();
-    const r = stage.getBoundingClientRect();
-    Array.from(e.touches).forEach(function(t) { spawnCoins(t.clientX - r.left, t.clientY - r.top, 8); });
-  }, { passive: false });
+  stage.addEventListener('click',function(e){var r=stage.getBoundingClientRect();spawnCoins(e.clientX-r.left,e.clientY-r.top);});
+  stage.addEventListener('touchstart',function(e){e.preventDefault();var r=stage.getBoundingClientRect();Array.from(e.touches).forEach(function(t){spawnCoins(t.clientX-r.left,t.clientY-r.top,8);});},{passive:false});
 })();
 
+/* ── 3. GIFT BOX ── */
 (function() {
-  const box      = document.getElementById('giftBox');
-  const hint     = document.getElementById('giftInstruction');
-  const resetBtn = document.getElementById('resetGift');
-  const confetti = document.getElementById('confettiContainer');
-  let opened = false;
-  const rewards = ['쿠폰 3,000원 획득!', 'VIP 포인트 500P!', '무료배송 쿠폰!', '깜짝 선물!', '별점 보상 300원!'];
-  const colors  = ['#FF6900','#E53935','#FFD600','#43A047','#8E24AA','#1E88E5'];
-
-  function launchConfetti() {
-    confetti.innerHTML = '';
-    for (let i = 0; i < 28; i++) {
-      const p = document.createElement('div');
-      p.className = 'conf-piece';
-      const cx = ((Math.random() - .5) * 240) + 'px';
-      const cy = (-(80 + Math.random() * 140)) + 'px';
-      const cr = ((Math.random() - .5) * 720) + 'deg';
-      p.style.cssText = 'left:50%;top:50%;background:'+colors[Math.floor(Math.random()*colors.length)]+';border-radius:'+(Math.random()>.5?'50%':'2px')+';--cx:'+cx+';--cy:'+cy+';--cr:'+cr+';animation-delay:'+(Math.random()*.3)+'s';
-      confetti.appendChild(p);
+  var box=document.getElementById('giftBox'), hint=document.getElementById('giftInstruction');
+  var resetBtn=document.getElementById('resetGift'), conf=document.getElementById('confettiContainer');
+  var opened=false;
+  var rewards=['쿠폰 3,000원 획득!','VIP 포인트 500P!','무료배송 쿠폰!','깜짝 선물!','별점 보상 300원!'];
+  var colors=['#FF6900','#E53935','#FFD600','#43A047','#8E24AA','#1E88E5'];
+  function launchConfetti(){
+    conf.innerHTML='';
+    for(var i=0;i<28;i++){
+      var p=document.createElement('div'); p.className='conf-piece';
+      var cx=((Math.random()-.5)*240)+'px', cy=(-(80+Math.random()*140))+'px', cr=((Math.random()-.5)*720)+'deg';
+      p.style.cssText='left:50%;top:50%;background:'+colors[Math.floor(Math.random()*colors.length)]+';border-radius:'+(Math.random()>.5?'50%':'2px')+';--cx:'+cx+';--cy:'+cy+';--cr:'+cr+';animation-delay:'+(Math.random()*.3)+'s';
+      conf.appendChild(p);
     }
   }
-
-  box.addEventListener('click', function() {
-    if (opened) return;
-    opened = true;
-    const reward = rewards[Math.floor(Math.random() * rewards.length)];
-    document.getElementById('giftReward').textContent = reward;
-    box.classList.add('opened');
-    launchConfetti();
-    hint.textContent = '축하합니다!';
-    resetBtn.style.display = 'inline-block';
-    showToast(reward);
+  box.addEventListener('click',function(){
+    if(opened)return; opened=true;
+    var r=rewards[Math.floor(Math.random()*rewards.length)];
+    document.getElementById('giftReward').textContent=r;
+    box.classList.add('opened'); launchConfetti();
+    hint.textContent='축하합니다!'; resetBtn.style.display='inline-block'; showToast(r);
   });
-
-  resetBtn.addEventListener('click', function() {
-    opened = false;
-    box.classList.remove('opened');
-    confetti.innerHTML = '';
-    hint.textContent = '상자를 클릭해서 열어보세요';
-    resetBtn.style.display = 'none';
+  resetBtn.addEventListener('click',function(){
+    opened=false; box.classList.remove('opened'); conf.innerHTML='';
+    hint.textContent='상자를 클릭해서 열어보세요'; resetBtn.style.display='none';
   });
 })();
 
+/* ── 4. SKELETON ── */
 (function() {
-  const area = document.getElementById('skeletonArea');
-  const products = [
-    { emoji:'&#x1F45F;', name:'에어 스니커즈 런닝화', price:'₩12,900', old:'₩29,000', badge:'-55%' },
-    { emoji:'&#x1F3A7;', name:'블루투스 무선 이어폰', price:'₩8,500',  old:'₩18,000', badge:'-53%' },
-    { emoji:'&#x231A;',  name:'스마트워치 밴드',      price:'₩24,000', old:'₩52,000', badge:'-54%' },
+  var area=document.getElementById('skeletonArea');
+  var products=[
+    {emoji:'&#x1F45F;',name:'에어 스니커즈 런닝화',price:'₩12,900',old:'₩29,000',badge:'-55%'},
+    {emoji:'&#x1F3A7;',name:'블루투스 무선 이어폰',price:'₩8,500',old:'₩18,000',badge:'-53%'},
+    {emoji:'&#x231A;',name:'스마트워치 밴드',price:'₩24,000',old:'₩52,000',badge:'-54%'}
   ];
-
-  function showSkeleton() {
-    area.innerHTML = products.map(function() { return '<div class="skeleton-card"><div class="sk sk-img"></div><div class="sk-lines"><div class="sk sk-line w80"></div><div class="sk sk-line w60"></div><div class="sk sk-line w40"></div></div></div>'; }).join('');
+  function showSkeleton(){ area.innerHTML=products.map(function(){return '<div class="skeleton-card"><div class="sk sk-img"></div><div class="sk-lines"><div class="sk sk-line w80"></div><div class="sk sk-line w60"></div><div class="sk sk-line w40"></div></div></div>';}).join(''); }
+  function showContent(){
+    area.innerHTML=products.map(function(p){return '<div class="real-card"><div class="real-img">'+p.emoji+'</div><div class="real-info"><div class="real-name">'+p.name+'</div><div class="real-price">'+p.price+' <span class="real-old">'+p.old+'</span></div><span class="real-badge">'+p.badge+'</span></div></div>';}).join('');
+    requestAnimationFrame(function(){area.querySelectorAll('.real-card').forEach(function(c,i){setTimeout(function(){c.classList.add('loaded');},i*120);});});
   }
-
-  function showContent() {
-    area.innerHTML = products.map(function(p) { return '<div class="real-card"><div class="real-img">'+p.emoji+'</div><div class="real-info"><div class="real-name">'+p.name+'</div><div class="real-price">'+p.price+' <span class="real-old">'+p.old+'</span></div><span class="real-badge">'+p.badge+'</span></div></div>'; }).join('');
-    requestAnimationFrame(function() {
-      area.querySelectorAll('.real-card').forEach(function(c, i) {
-        setTimeout(function() { c.classList.add('loaded'); }, i * 120);
-      });
-    });
-  }
-
-  function simulate() { showSkeleton(); setTimeout(showContent, 1800); }
+  function simulate(){showSkeleton();setTimeout(showContent,1800);}
   simulate();
-  document.getElementById('skelReloadBtn').addEventListener('click', simulate);
+  document.getElementById('skelReloadBtn').addEventListener('click',simulate);
 })();
 
+/* ── 5. SPRING BUTTON ── */
 (function() {
-  let cartCount = 0;
-  let cartTotal = 0;
-  const badgeEl = document.getElementById('cartBadge');
-  const totalEl = document.getElementById('cartTotal');
-  const cartBar = document.getElementById('cartBar');
-
-  function addRipple(btn, e) {
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left, y = e.clientY - rect.top;
-    const rip = document.createElement('span');
-    rip.className = 'btn-ripple';
-    rip.style.cssText = 'width:'+rect.width+'px;height:'+rect.width+'px;left:'+(x-rect.width/2)+'px;top:'+(y-rect.width/2)+'px';
-    btn.appendChild(rip);
-    rip.addEventListener('animationend', function(){ rip.remove(); });
+  var cartCount=0, cartTotal=0;
+  var badgeEl=document.getElementById('cartBadge'), totalEl=document.getElementById('cartTotal'), cartBar=document.getElementById('cartBar');
+  function addRipple(btn,e){
+    var rect=btn.getBoundingClientRect(), x=e.clientX-rect.left, y=e.clientY-rect.top;
+    var rip=document.createElement('span'); rip.className='btn-ripple';
+    rip.style.cssText='width:'+rect.width+'px;height:'+rect.width+'px;left:'+(x-rect.width/2)+'px;top:'+(y-rect.width/2)+'px';
+    btn.appendChild(rip); rip.addEventListener('animationend',function(){rip.remove();});
   }
-
-  function flyToCart(emoji, fromRect) {
-    const cartRect = cartBar.getBoundingClientRect();
-    const destX = cartRect.left + 20;
-    const destY = cartRect.top  + cartRect.height / 2;
-    const el = document.createElement('div');
-    el.className = 'fly-item';
-    el.textContent = emoji;
-    const startX = fromRect.left + fromRect.width  / 2;
-    const startY = fromRect.top  + fromRect.height / 2;
-    el.style.cssText = 'left:'+startX+'px;top:'+startY+'px;--fx:'+(destX-startX)+'px;--fy:'+(destY-startY)+'px;--fly-dur:.75s';
+  function flyToCart(emoji,fromRect){
+    var cr=cartBar.getBoundingClientRect(), dx=cr.left+20, dy=cr.top+cr.height/2;
+    var el=document.createElement('div'); el.className='fly-item'; el.textContent=emoji;
+    var sx=fromRect.left+fromRect.width/2, sy=fromRect.top+fromRect.height/2;
+    el.style.cssText='left:'+sx+'px;top:'+sy+'px;--fx:'+(dx-sx)+'px;--fy:'+(dy-sy)+'px;--fly-dur:.75s';
     document.body.appendChild(el);
-    el.addEventListener('animationend', function() {
-      el.remove();
-      badgeEl.classList.remove('bounce');
-      void badgeEl.offsetWidth;
-      badgeEl.classList.add('bounce');
-    });
+    el.addEventListener('animationend',function(){el.remove();badgeEl.classList.remove('bounce');void badgeEl.offsetWidth;badgeEl.classList.add('bounce');});
   }
-
-  document.querySelectorAll('.add-cart-btn').forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
-      btn.classList.remove('spring');
-      void btn.offsetWidth;
-      btn.classList.add('spring');
-      addRipple(btn, e);
-      const emoji = btn.dataset.emoji;
-      const price = parseInt(btn.dataset.price, 10);
-      const rect  = btn.getBoundingClientRect();
-      flyToCart(emoji, rect);
-      cartCount++;
-      cartTotal += price;
-      badgeEl.textContent = cartCount;
-      totalEl.textContent = '₩' + cartTotal.toLocaleString();
-      showToast(emoji + ' 장바구니에 담겼어요!');
+  document.querySelectorAll('.add-cart-btn').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      btn.classList.remove('spring'); void btn.offsetWidth; btn.classList.add('spring');
+      addRipple(btn,e);
+      var emoji=btn.dataset.emoji, price=parseInt(btn.dataset.price,10), rect=btn.getBoundingClientRect();
+      flyToCart(emoji,rect);
+      cartCount++; cartTotal+=price;
+      badgeEl.textContent=cartCount; totalEl.textContent='₩'+cartTotal.toLocaleString();
+      showToast(emoji+' 장바구니에 담겼어요!');
     });
+  });
+})();
+
+/* ── 6. STATS COUNTER ── */
+(function() {
+  var targets=[{id:'s1',val:50000},{id:'s2',val:80},{id:'s3',val:99},{id:'s4',val:98}];
+  var running=false;
+  function easeOut(t){return 1-Math.pow(1-t,3);}
+  function countUp(){
+    if(running)return; running=true;
+    var dur=2200, start=performance.now();
+    var boxes=document.querySelectorAll('.stat-box');
+    boxes.forEach(function(b){b.classList.remove('lit');});
+    function frame(now){
+      var p=Math.min((now-start)/dur,1), e=easeOut(p);
+      targets.forEach(function(t,i){
+        var el=document.getElementById(t.id);
+        var v=Math.floor(t.val*e);
+        el.textContent=v>=1000?v.toLocaleString():v;
+        if(p>=1 && !boxes[i].classList.contains('lit')){
+          boxes[i].classList.add('lit');
+          var pulse=document.createElement('div'); pulse.className='stat-pulse';
+          boxes[i].appendChild(pulse); pulse.addEventListener('animationend',function(){pulse.remove();});
+        }
+      });
+      if(p<1){requestAnimationFrame(frame);}
+      else{running=false;showToast('통계 로드 완료!');}
+    }
+    requestAnimationFrame(frame);
+  }
+  document.getElementById('statsRunBtn').addEventListener('click',function(){
+    targets.forEach(function(t){document.getElementById(t.id).textContent='0';});
+    document.querySelectorAll('.stat-box').forEach(function(b){b.classList.remove('lit');});
+    running=false; countUp();
+  });
+  setTimeout(countUp,400);
+})();
+
+/* ── 7. NEON TYPEWRITER ── */
+(function() {
+  var phrases=[
+    '반복 업무를 AI가\n대신합니다',
+    '팀의 생산성을\n3배 높이세요',
+    '데이터로 더 나은\n결정을 내리세요',
+    '어디서나 함께\n일할 수 있습니다'
+  ];
+  var display=document.getElementById('twDisplay'), dotsEl=document.getElementById('twDots');
+  var cur=0, charIdx=0, deleting=false, timer=null;
+  phrases.forEach(function(_,i){
+    var d=document.createElement('div'); d.className='tw-dot'+(i===0?' active':'');
+    d.addEventListener('click',function(){clearTimeout(timer);cur=i;charIdx=0;deleting=false;tick();updateDots();});
+    dotsEl.appendChild(d);
+  });
+  function updateDots(){dotsEl.querySelectorAll('.tw-dot').forEach(function(d,i){d.classList.toggle('active',i===cur);});}
+  function tick(){
+    var txt=phrases[cur];
+    if(!deleting){
+      charIdx++;
+      display.innerHTML=txt.slice(0,charIdx).replace(/\n/g,'<br>');
+      if(charIdx>=txt.length){timer=setTimeout(function(){deleting=true;tick();},1800);}
+      else{timer=setTimeout(tick,60+Math.random()*40);}
+    } else {
+      charIdx--;
+      display.innerHTML=txt.slice(0,charIdx).replace(/\n/g,'<br>');
+      if(charIdx<=0){deleting=false;cur=(cur+1)%phrases.length;updateDots();timer=setTimeout(tick,400);}
+      else{timer=setTimeout(tick,30);}
+    }
+  }
+  tick();
+  document.getElementById('twRestartBtn').addEventListener('click',function(){
+    clearTimeout(timer);cur=0;charIdx=0;deleting=false;updateDots();tick();
+  });
+})();
+
+/* ── 8. 3D TILT CARDS ── */
+(function() {
+  document.querySelectorAll('[data-tilt]').forEach(function(card) {
+    var shine=card.querySelector('.tilt-shine');
+    var strength=15;
+    function applyTilt(x,y){
+      var rect=card.getBoundingClientRect();
+      var cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
+      var dx=(x-cx)/rect.width, dy=(y-cy)/rect.height;
+      var rx=-dy*strength, ry=dx*strength;
+      card.style.transform='perspective(800px) rotateX('+rx+'deg) rotateY('+ry+'deg) scale(1.03)';
+      var px=((x-rect.left)/rect.width*100).toFixed(1)+'%';
+      var py=((y-rect.top)/rect.height*100).toFixed(1)+'%';
+      shine.style.setProperty('--mx',px); shine.style.setProperty('--my',py);
+    }
+    function reset(){
+      card.style.transform='perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)';
+    }
+    card.addEventListener('mousemove',function(e){applyTilt(e.clientX,e.clientY);});
+    card.addEventListener('mouseleave',reset);
+    card.addEventListener('touchmove',function(e){e.preventDefault();applyTilt(e.touches[0].clientX,e.touches[0].clientY);},{passive:false});
+    card.addEventListener('touchend',reset);
+    card.addEventListener('click',function(){showToast('기능 살펴보기 →');});
   });
 })();
 </script>
